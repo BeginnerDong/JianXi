@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>详情</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+  .contact{
+    text-align: center;
+    width:100%;
+  }
+  .contact img{
+    width:2.8rem;
+    height:2.8rem;
+    margin:0 auto;
+  }
+  .contact a{
+    display:block;
+    width:100%;
+    height:0.9rem;
+    text-align: center;
+    line-height:0.9rem;
+  }
+  .submit_info{
+    border-radius:0.5rem;
+    font-size:0.26rem;
+  }
+  .detail_tlt{
+    width:100%;
+    height:0.84rem;
+  }
+  .detail_tlt span{
+    margin-right:0.3rem;
+  }
+  .conment_back{
+    background:#f8f8f8;
+    padding:3%;
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="w750">
+     <div id="details">
+        <div class="banner">
+          <img src="images/img@2x.png"/>
+        </div>
+        <div class="detail">
+          <div class="product_top">
+            <div class="detail_tlt flex">
+              <span class="font30 color_r">¥560</span>
+              <span class="font22 color6">1235人已下单</span>
+            </div>
+            <div class="flexRowBetween" style="align-items:center;">
+              <div class="avoidOverflow font28 color2">
+                网站开发高端定制网站开发高端定制网站开发高端定制网站开发高端定制网站开发高端定制网站开发高端定制x
+              </div> 
+            </div>
+            <div class="font26 color9" style="margin-top:0.2rem;">内容内容内容内容内容内容内容内容内容内容内容内容内容内 内容内容内容内容内容内容内容内容内容内容内容内容内容内 内容内容内容内</div>
+           
+          </div>
+          <div class="detail_comment flexRowBetween">
+            <div class="detail" :class="tabCurrent == 0?'detail_select':''" @click="select_this(0)">
+              详情
+            </div>
+            <div class="comment" :class="tabCurrent == 1?'detail_select':''" data-current="1" @click="select_this(1)">
+              评价(123)
+            </div>
+          </div>
+          <div class="detail_show">
+            <div id="detail" class="w690" v-if="tabCurrent==0">
+              <img src="images/details-img@2x.png"/>    
+            </div>
+            <div id="comment"  v-if="tabCurrent==1">
+              <div class="comment_list w690">
+                <div class="flexRowBetween">
+                  <div class="comment_user flexRowBetween">
+                    <div style="width:80%;" class="flex">
+                      <div class="user_img">
+                        <img src="images/my-img@2x.png"/>
+                      </div>
+                      <div class="text1">米桃子</div>
+                    </div>
+                    <div class="text2" style="width:20%;">2015.3.2</div>
+                  </div>
+                </div>
+                <div class="comment_cont">
+                  很满意的一次购物很满意的一次购物很满意的一次购物
+                </div>
+              </div>
+               <div class="comment_list w690">
+                <div class="flexRowBetween">
+                  <div class="comment_user flexRowBetween">
+                    <div style="width:80%;" class="flex">
+                      <div class="user_img">
+                        <img src="images/my-img@2x.png"/>
+                      </div>
+                      <div class="text1">米桃子</div>
+                    </div>
+                    <div class="text2" style="width:20%;">2015.3.2</div>
+                  </div>
+                </div>
+                <div class="comment_cont">
+                  很满意的一次购物很满意的一次购物很满意的一次购物
+                </div>
+                <div class="font22 color6 conment_back">店长回复：内容内容内容内容内容内容内容内容内容内容内容内容内容内 内容内容内容内容内容内容内容内容内容内容内容内容内容内 内容内容内容内</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div :class="isShow?'mask':''"></div>
+
+        </div>
+        <div id="buy">
+          <div class="buy_click flexRowBetween">
+            <div style="width:40%" class="flexRowBetween">
+              <div class="consult">
+                <img src="images/details-icon1@2x.png"/>
+                <div class="text1">收藏</div>
+              </div>
+              <div class="consult collect">
+                <img src="images/details-icon2@2x.png"/>
+                <div class="text1" @click="buy">加入购物车</div>
+              </div>
+            </div>
+            <div class="go_buy flexRowBetween">
+              <div class="submit_info" @click="buy" style=" width:100%;background:#ffbc2c;">下单购买</div>
+            </div>
+          </div>
+        </div>
+        <div id="choose" :class="isShow?'sildeIn':'slideOut'">
+          <div class="w710" style="position: relative;height:100%;overflow: hidden;">
+            <div class="flex1 pricity">
+              <div class="choose_pro">
+                <img src="images/img4@2x.png"/>
+              </div>
+              <div class="product_txt">
+                <div class="pro_name">公众号管理</div>
+                <div class="pro_type">
+                  个性化定制
+                </div>
+                <div class="price_choose color_r font28">
+                积分:56
+                </div>
+              </div>
+              <div class="close" @click="close">
+              <img src="images/close_a.png"/>
+              </div>
+            </div>
+            <div class="choose_number flexRowBetween">
+              <div class="number_txt">
+                数量
+              </div>
+              <div class="edit_number flexRowBetween">
+                <div class="minus" style="line-height:45rpx;border-right: solid 1px #e5e5e5;">-</div>
+                <div class="number">1</div>
+                <div class="add">+</div>
+              </div>
+            </div>
+            <button class="submit_info" style="position: absolute;left:0;height:0.8rem;line-height:0.8rem;background:#ffbc2c;bottom:0.3rem;" @click="confirm('confirmOrder')">确认</button>
+          </div>
+          
+        </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+          tabCurrent:0,
+          isShow:false,
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      select_this(url){
+        const self = this;
+        self.tabCurrent = url
+      },
+      buy(){
+        const self  = this;
+        self.isShow = true;
+      }, 
+      shopping(){
+        const self  = this;
+        self.isShow = true;
+      },
+      close(){
+         const self  = this;
+        self.isShow = false;
+      },
+      confirm(url){
+        var into_url = url;
+        window.location.href=into_url+'.html'
+      },
+    } 
+
+});           
+</script>
+</body>
+</html>

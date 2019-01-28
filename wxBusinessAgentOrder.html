@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>下级订单</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+.order_item{
+  width:1.4rem;
+  height:0.5rem;
+  border:solid 1px #e0e0e0;
+  border-radius:0.02rem;
+  float:right;
+  margin-top:0.3rem;
+  text-align: center;
+  line-height:0.5rem;
+}
+.tab_item{
+  width:28%;
+}
+.tab_this{
+  color:#212121;
+  border-bottom:solid 1px #212121;
+}
+.perfomence{
+  width:100%;
+  height:1rem;
+  border-radius:0.2rem;
+  margin-top:0.3rem;
+}
+.perfomence_item{
+  text-align: center;
+}
+.perfomence_item img{
+  width:0.14rem;
+  height:0.22rem;
+}
+</style>
+</head>
+<body style="background:#f2f2f2">
+
+<div id="app">
+  <div class="w750">
+    <div class="w690">
+      <div class="perfomence bg1 flexRowBetween" @click="intoPath('wxBusinessAgentDetail')">
+        <div class="perfomence_item font28 color2" style="width:18%">
+          张三
+        </div>
+        <div class="perfomence_item font28 color2"  style="width:62%">
+          2018-9-9
+        </div>
+        <div class="perfomence_item font28 color2 flexRowBetween" style="width:20%;padding-right:3%;">
+          <p>2种</p>
+          <img src="images/next-page@2x.png"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+          currentId:0
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+      const self= this;
+    },
+
+    methods:{
+      tab(url){
+        const self = this;
+        self.currentId = url;
+      },
+      intoPath(url){
+          var into_url = url;
+          window.location.href=into_url+'.html'
+      }
+    } 
+
+});           
+</script>
+</body>
+</html>

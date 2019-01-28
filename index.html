@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>授权申请</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+</head>
+<body>
+
+<div id="app">
+    <div class="w750">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li  data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li  data-target="#carousel-example-generic" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div  class="item active">
+                  <img src="images/img@2x.png" class="img-responsive banner_img">
+                </div>
+                <div  class="item">
+                  <img src="images/img@2x.png" class="img-responsive banner_img">
+                </div>
+            </div> 
+            <a class="left carousel-control flex" href="#carousel-example-generic" role="button" data-slide="prev">
+            </a>
+            <a class="right carousel-control flex" href="#carousel-example-generic" role="button" data-slide="next">
+              
+            </a>
+        </div>
+        <div class="title flexCenter">
+            <img src="images/icon@2x.png"/>
+            <span class="font30 color2">积分商城</span>
+        </div>
+        <div class="w690 index_product flexRowBetween">
+          <a class="recommend_left" @click="intoPath('detail')">
+              <img src="images/img4@2x.png"/>
+              <div class="product_name font28 color2">名称名称名称名称</div>
+              <div class="product_pro font24 flex">
+                  <p class="font24 color_r">积分:56</p>
+                  <p class="font20 color9">1212人下单</p>
+              </div>
+          </a>
+        </div>
+    </div>
+</div>
+<a class="shopping" href="">
+    <img src="images/icon1@2x.png"/>
+</a>
+<div class="solely" style="font-size:0.20rem;color:#666;text-align:center;height:0.8rem;line-height:0.8rem;">
+    技术支持:西安纯粹科技
+</div>
+<div style="height:1.4rem;width:100%;"></div>
+<div class="wx_navbar flex bg1">
+    <a class="navbar_item" href="authorize.html">
+        <div class="nav_img flex">
+            <img src="images/navbar1-a@2x.png">
+        </div>
+        <div class="text">授权申请</div>
+    </a>
+    <a class="navbar_item" href="index.html">
+        <div class="nav_img flex">
+            <img src="images/navbar2-a@2x.png">
+        </div>
+        <div class="this-text">简希</div>
+    </a>
+    <a class="navbar_item" href="scan.html">
+        <div class="nav_img flex">
+            <img src="images/navbar3@2x.png">
+        </div>
+        <div class="text">扫码</div>
+    </a>
+    <a class="navbar_item" href="user.html">
+        <div class="nav_img flex">
+            <img src="images/navbar4@2x.png">
+        </div>
+        <div class="text">我的</div>
+    </a>
+</div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      intoPath(url){
+        var into_url = url;
+        window.location.href=into_url+'.html'
+      },
+
+    } 
+
+});           
+</script>
+</body>
+</html>

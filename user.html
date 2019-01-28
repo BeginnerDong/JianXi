@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>个人中心</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+</head>
+<body style="background:#f8f8f8;">
+<style>
+ .user_banner{
+  width:100%;
+  height:2.20rem;
+}
+.user_banner img{
+  width:100%;
+  height:100%;
+}
+.banner_left{
+  width:28%;
+  height:100%;
+
+}
+.banner_right{
+  width:40%;
+}
+.credit{
+  width:37%;
+  padding-right:5%;
+}
+.user_img{
+  width:1.40rem;
+  height:1.40rem;
+  border-radius:50%;
+  overflow:hidden;
+  margin:0px auto;
+}
+.credit_left{
+  width:50%;
+  height:100%;
+}
+.credit_left img{
+  width:.24rem;
+  height:.30rem;
+  margin-right:.10rem;
+}
+.credit_in{
+  width:100%;
+  height:.94rem;
+}
+.in_left{
+  width:50%;
+  height:100%;
+  text-align:center;
+}
+.in_right{
+  border-left:solid 1px #fff;
+}
+.order{
+  margin-top:.12rem;
+  background:#fff;
+  border-bottom:solid 1px #dcdcdc;}
+.user_order{
+  height:.96rem;
+  align-items:center;
+  line-height:.96rem;
+  width:100%;
+}
+.order_left{
+  align-items:center;
+  width:80%;
+}
+.order_left img{
+  width:.28rem;
+  height:.32rem;
+
+  margin-right:.16rem;
+}
+.check_order{
+  width:20%;
+  height:100%;
+  text-align:right;
+}
+.check_order img{
+  width:.11rem;
+  height:.20rem;
+  margin-left.:8rem;
+}
+.check_order{
+  font-size:.24rem;
+  color:#333;
+}
+.process{
+  background:#fff;
+  height:1.62rem;
+}
+.peocess_item {
+  text-align:center;
+  width:20%;
+}
+.peocess_item img{
+  width:.6rem;
+  height:.6rem;
+  margin-bottom:0.2rem;
+}
+.item_other image{
+  width:.50rem;
+}
+.peocess_item span{display:block;}
+.user_left{
+  align-items:center;
+}
+.user_left img{
+  width:.30rem;
+  height:.32rem;
+  margin-right:.12rem;
+}
+.user_infor{
+  height:.96rem;
+  line-height:.96rem;
+  background:#fff;
+  border-bottom:solid 1px #dcdcdc;
+  align-items:center;
+  }
+.next_page img{
+  width:.11rem;
+  height:.20rem;
+}
+.user_all{
+  margin-top:.22rem;
+}
+.user_img{
+  width:1.2rem;
+  height:1.2rem;
+}
+.order{
+  margin-top:0.2rem;
+}
+.bank{
+  width:1.2rem;
+  height:0.4rem;
+  text-align: center;
+  line-height:0.4rem;
+  background:#ffbc2c;
+  font-size:0.2rem;
+  color:#fff;
+  border-radius:0.1rem;
+  display:block;
+}
+</style>
+<div id="app">
+    <div class="w750">
+        <div class="user_banner bg1 flex">
+          <div class="banner_left flex">
+              <div class="user_img">
+                  <img src="images/my-img@2x.png"/>
+              </div>
+          </div>
+          <div class="banner_right">
+            <p class="font28 color2">名称名称名称名称</p>
+            <span class="bank font22">皇冠会员</span>
+          </div>
+          <div class="credit flexRowBetween">
+            <p class="font26 color2">剩余积分</p>
+            <p class="font26 color_y">566</p>
+          </div>
+      </div>
+      <div class="order w710 font30 color3">
+          <div class="user_order flexRowBetween" @click="intoPath('userOrder')">
+              <div class="order_left flex">
+                  <img src="images/user_icon1.jpg"/>
+                  <div class="my_order color2 font30">我的订单</div>
+              </div>
+              
+              <div class="check_order flexRowBetween">
+                  <div class="font26 color6">
+                      查看订单
+                  </div>
+                  <img src="images/next-page@2x.png"/>
+              </div>
+          </div>
+      </div>
+      <div class="w710 font30 color3 bg1" >
+          <div class="process flexRowBetween">
+              <div class="peocess_item item_other" @click="intoPath_a('userOrder.html?id=0')">
+                  <img src="images/user-icon1@2x.png"/>
+                  <span class="font22 color6">待付款</span>
+              </div>
+              <div class="peocess_item" @click="intoPath_a('userOrder.html?id=1')">
+                  <img src="images/user-icon2@2x.png"/>
+                  <span class="font22 color6">待发货</span>
+              </div>
+              <div class="peocess_item" @click="intoPath_a('userOrder.html?id=2')">
+                  <img src="images/user-icon3@2x.png"/>
+                  <span class="font22 color6">待收货</span>
+              </div>
+              <div class="peocess_item"@click="intoPath_a('userOrder.html?id=3')">
+                  <img src="images/user-icon4@2x.png"/>
+                  <span class="font22 color6">已完成</span>
+              </div>
+              <div class="peocess_item" @click="intoPath_a('userOrder.html?id=4')">
+                  <img src="images/user-icon5@2x.png"/>
+                  <span class="font22 color6">已撤销</span>
+              </div>
+          </div>
+      </div>
+      <div class="user_all font30 color3">
+          <div class="user_infor flexRowBetween w710"  @click="intoPath('userAddress')">
+              <div class="user_left flexRowBetween">
+                  <img src="images/user-icon6@2x.png"/>
+                  <span>收货地址</span>
+              </div>
+              <div class="next_page">
+                  <img src="images/next-page@2x.png"/>
+              </div>
+          </div>
+          <div class="user_infor flexRowBetween w710" @click="intoPath('userCollect')">
+              <div class="user_left flexRowBetween">
+                  <img src="images/user-icon7@2x.png"/>
+                  <span>我的收藏</span>
+              </div>
+              <div class="next_page">
+                  <img src="images/next-page@2x.png"/>
+              </div>
+          </div>
+          <div class="user_infor flexRowBetween w710" style="margin-top:0.2rem;" @click="intoPath('userContact')">
+              <div class="user_left flexRowBetween">
+                  <img src="images/user-icon8@2x.png"/>
+                  <span>联系我们</span>
+              </div>
+              <div class="next_page">
+                  <img src="images/next-page@2x.png"/>
+              </div>
+          </div>
+          <div class="user_infor flexRowBetween w710" @click="intoPath('userAbout')">
+              <div class="user_left flexRowBetween">
+                  <img src="images/user-icon9@2x.png"/>
+                  <span>关于我们 </span>
+              </div>
+              <div class="next_page">
+                  <img src="images/next-page@2x.png"/>
+              </div>
+          </div>
+          <div class="user_infor flexRowBetween w710" @click="intoPath('wxBusinessLogin')"  style="margin-top:0.2rem;">
+              <div class="user_left flexRowBetween">
+                  <img src="images/user-icon10@2x.png"/>
+                  <span>微商登录</span>
+              </div>
+              <div class="next_page">
+                  <img src="images/next-page@2x.png"/>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      intoPath(url){
+          console.log(url);
+          var into_url = url;
+          console.log(into_url);
+          window.location.href=into_url+'.html'
+      },
+      intoPath_a(url){
+          console.log(url);
+          var into_url = url;
+          console.log(into_url);
+          window.location.href=into_url
+      }
+
+    } 
+
+});           
+</script>
+</body>
+</html>

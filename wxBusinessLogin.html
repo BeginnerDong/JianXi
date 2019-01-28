@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+ .login{
+  width:100%;
+  height:100vh;
+  position: relative;
+}
+.login img{
+  width:100%;
+  height:100%;
+}
+.login_box{
+  width:100%;
+  height:4.20rem;
+  border-radius:.16rem;
+  box-shadow:0 0 .60rem #d0d2d8;
+}
+.login_cont{
+  position: absolute;
+  left:0;
+  top:0;
+  height:100%;
+}
+.login_input{
+  width:72%;
+  margin:0 auto;
+}
+.list_input{
+  width:100%;
+  height:.98rem;
+  line-height:.98rem;
+  border-bottom:solid 1px #f0f0f0;
+  overflow: hidden;
+}
+.list_input input{
+  font-size:.24rem;
+  color:#666;
+  width:100%;
+  height:100%;
+  line-height:1.20rem;
+  border:0;
+}
+.get_check{
+  width:1.70rem;
+  height:.50rem;
+  text-align: center;
+  line-height:.50rem;
+  background: #e0e0e0;
+  color:#666;
+  font-size:.24rem;
+  border:0;
+}
+button{
+  border:0;
+}
+.submit_info{
+  height:0.8rem;
+  line-height:0.8rem;
+  width:100%;
+  margin:100rpx auto 0 auto;
+}
+.login_cont{
+  width:100%;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="w750 flex" style="height:100vh">
+      <div class="login">
+        <img src="images/login.jpg"/>
+        <div class="w690 flex login_cont">
+            <div class="login_box bg1">
+                <div class="login_input">
+                    <div class="list_input">
+                        <input placeholder="请输入账号" value=""></input>
+                    </div>
+                    <div class="list_input flexRowBetween">
+                        <input type="password" placeholder="请输入密码" value="">
+                    </div>
+                    <button class="submit_info"  @click="intoPath('wxBusiness')">登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      intoPath(url){
+          console.log(url);
+          var into_url = url;
+          console.log(into_url);
+          window.location.href=into_url+'.html'
+      }
+
+    } 
+
+});           
+</script>
+</body>
+</html>

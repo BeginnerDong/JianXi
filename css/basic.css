@@ -1,0 +1,118 @@
+* {
+	margin:0;
+	padding: 0;
+}
+body {
+	font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif,"宋体"; 
+	color: #000;
+	font-size: 14px;
+	overflow-x: hidden !important;
+	position: relative;
+	font-weight:normal;
+}
+@font-face{
+	font-family: "siyuan";
+	src: url('../SourceHanSans-Light/SourceHanSans-Light.otf') format('otf');
+	src: url('../SourceHanSans-Light/SourceHanSans-Light.ttf') format('ttf');
+	src: url('../SourceHanSans-Light/SourceHanSans-Light.woff') format('woff');
+}
+h1,h2,h3,h4,h5,h6,p,ul { 
+	margin: 0;
+	padding: 0;
+}
+h1,h2,h3,h4,h5,h6 {
+/*	font-family: 'Josefin Sans', sans-serif;*/
+	color: #272626;
+	text-transform: capitalize;
+	font-weight: normal;
+}
+
+
+a { cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition: all .5s ease-out;
+	   -moz-transition: all .5s ease-out;
+	    -ms-transition: all .5s ease-out;
+	     -o-transition: all .5s ease-out;
+	        transition: all .5s ease-out;
+}
+a:hover,a:active,a:visited,a:focus {
+	text-decoration: none;
+	outline: none;
+	color:#fff;
+}
+button {
+	border: none;
+	outline: none;
+	box-shadow: none;
+	display: block; 
+	padding: 0;
+}
+ul {
+	list-style-type: none;
+}
+/*img {width: 100%; display: block;}*/
+input,textarea {outline: none; -webkit-box-shadow: none; box-shadow: none;-webkit-transition: all 0.4s ease-in-out;transition: all 0.4s ease-in-out;}
+.main-page-wrapper {overflow-x: hidden !important;}
+.font20{
+	font-size:0.2rem;
+}
+.font22{
+	font-size:0.22rem;
+}
+.font24{
+	font-size:0.24rem;
+}
+.font26{
+	font-size:0.26rem;
+}
+.font28{
+	font-size:0.28rem;
+}
+.font30{
+	font-size:0.3rem;
+}
+.font32{
+	font-size:0.32rem;
+}
+.font34{
+	font-size:0.34rem;
+}
+.font36{
+	font-size:0.36rem;
+}
+.color_r{
+	color:#ff3b3b;
+}
+.w690{
+	padding:0 4%;
+}
+.p40{
+	padding:0 5.6%;
+	width:88.8%;
+}
+.w710{
+	padding:0 2.6%;
+}
+.bg1{
+	background:#fff;
+}
+.shadow1{
+	box-shadow:0 0 0.12rem #ededed;
+}
+.submit_info{
+	margin:0.5rem auto 0 auto;
+	width:7.00rem;
+	height:.6rem;
+	line-height:.6rem;
+	text-align:center;
+	font-size:.32rem;
+	border-radius:.10rem;
+	color:#fff;
+	background:#212121;
+	display:block;
+}
+.navbar_item .text{
+	color:#999;
+}

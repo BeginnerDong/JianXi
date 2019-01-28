@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>收货地址</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+ .address_list{
+  width:100%;
+  height:0.76rem;
+  line-height:0.9rem;
+ }
+ .address_handle{
+  height:0.84rem;
+  margin-bottom:0.24rem;
+ }
+ .address_left{
+  width:61%;
+ }
+ .address_right{
+  width:39%;
+ }
+ .address_left img{
+  width:0.24rem;
+  height:0.24rem;
+  margin-right:0.1rem;
+ }
+ .address_left span{
+  color:#999;
+ }
+ .address_right img{
+  width:0.28rem;
+  height:0.28rem;
+  margin-right:0.1rem;
+ }
+ .address_right span{
+  font-size:0.26rem;
+  color:#999;
+ }
+ .submit_info{
+  width:100%;
+  border-radius:0;
+  position: fixed;
+  left:0;
+  bottom:0;
+  height:0.8rem;
+  line-height:0.8rem;
+ }
+</style>
+</head>
+<body style="background:#f8f8f8;">
+
+<div id="app">
+  <div class="w750">
+    <div class="userAddress bg1">
+      <div class="address_list flexRowBetween w690">
+        <p class="color2 font28">张三</p>
+        <p class="color9 font26">1545646465</p>
+      </div>
+      <div class=" w690 font28 color2 avoidOverflow">陕西省西安市高新区大都会</div>
+      <div class="w690 address_handle flex">
+        <div class="address_left flex" @click="choose(0)">
+          <img :src="is_choose==0?'images/select_a.png':'images/select.png'"/>
+          <span>默认地址</span>
+        </div>
+        <div class="address_right flexRowBetween">
+          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>编辑</span></div>
+          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>删除</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="userAddress bg1">
+      <div class="address_list flexRowBetween w690">
+        <p class="color2 font28">张三</p>
+        <p class="color9 font26">1545646465</p>
+      </div>
+      <div class=" w690 font28 color2 avoidOverflow">陕西省西安市高新区大都会</div>
+      <div class="w690 address_handle flex">
+        <div class="address_left flex" @click="choose(1)">
+          <img :src="is_choose==1?'images/select_a.png':'images/select.png'"/>
+          <span>默认地址</span>
+        </div>
+        <div class="address_right flexRowBetween">
+          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>编辑</span></div>
+          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>删除</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="submit_info" @click="intoPath('userAddressNew')">添加</div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+          is_choose:0,
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      choose(id){
+        const self = this;
+        self.is_choose = id;
+      },
+      intoPath(url){
+          console.log(url);
+          var into_url = url;
+          console.log(into_url);
+          window.location.href=into_url+'.html'
+      }
+    } 
+
+});           
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>评价</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+</style>
+</head>
+<body>
+<style>
+    .comment_tlt{
+        height:0.96rem;
+        line-height:0.96rem;
+    }
+    .comment_cont{
+        width:100%;
+        height:3.8rem;
+        background:#f2f2f2;
+    }
+    .comment_cont textarea{
+        width:100%;
+        height:3.8rem;
+        background:#f2f2f2;
+        border:0;
+        padding:3%;
+    }
+    .submit_info{
+        height:0.8rem;
+        line-height:0.8rem;
+        background:#ffbc2c;
+        width:100%;
+        margin:1rem auto;
+        border:none;
+        color:#fff;
+    }
+</style>
+<div id="app">
+  <div class="w750">
+    <div class="product">
+        <div class="order_tlt w710 flexRowBetween ">
+            <div class="tlt_left color2">交易时间：2018-09-20</div>
+            <div class="tlt_left tlt_right color_r">已完成</div>
+        </div>
+        <div class="product_box w710 flexRowBetween">
+            <div class="product_left">
+                <img src="images/img4@2x.png">
+            </div>
+            <div class="product_right">
+                <div class="product_detail">
+                    <div class="font32 color2 product_top">空间+导示</div>
+                    <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                    <div class="product_price flexRowBetween">
+                      <div class="font28 color6">X1</div>
+                      <div class="font30 color_r">积分:56</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w690">
+            <div class="comment_tlt font28 color6">
+                填写评价
+            </div>
+            <div class="comment_cont">
+                <textarea placeholder="请写下您对这次交易的看法"></textarea>
+            </div>
+            <button class="submit_info">提交</button>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+          currentId:0
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      tab(url){
+        const self = this;
+        self.currentId = url;
+        console.log(999,self.currentId);
+      }
+
+    } 
+
+});           
+</script>
+</body>
+</html>

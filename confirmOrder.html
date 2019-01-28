@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>联系我们</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+  .manage{
+  height:1.60rem;
+  border-bottom:solid 1px #e0e0e0;
+}
+.manage_cont{
+  width:100%;
+  height:1.20rem;
+  font-size:.34rem;
+}
+.address_left{
+  width:60%;
+}
+.address_left image{
+  width: .30rem;
+  height:.32rem;
+  margin-right: .10rem;
+}
+.infor_left image{
+  width: .30rem;
+  height:.32rem;
+}
+.user_address {
+  height:50%;
+}
+.address_infor{
+  height:50%;
+}
+.address_right{
+  width:40%;
+  text-align:right;
+}
+.product{
+  border-bottom:solid 1px #e0e0e0;
+}
+.product_box{
+  height:2.30rem;
+}
+.product_detail{
+  width:100%;
+  height:1.40rem;
+}
+.product_left{
+  width:32%;
+  height:1.96rem;
+}
+.product_left image{
+  width:1.96rem;
+  height:1.96rem;
+}
+.product_right{
+  width:68%;
+  height:1.96rem;
+}
+.product_price{
+  width:100%;
+}
+.test{
+  height:100%;
+  display:flex;
+  flex-flow: row wrap;
+  align-content:space-between;
+}
+.product_price{
+  width:100%;
+  height:50%;
+}
+.product_top{
+  height:40%;
+}
+.submit_info{
+  width:1.66rem;
+  height:.70rem;
+  line-height:.70rem;
+  margin:0;
+  float:right;
+  background:#fff;
+  border:solid 1px #e83632;
+  color:#666;
+}
+.infor_left{
+  width:6%;
+}
+.infor_right{
+  width:94%;
+}
+.way_left{
+  width:50%;
+  height:.70rem;
+}
+.way_left image{
+  width:.30rem;
+  height:.30rem;
+  margin-right:.10rem;
+}
+.confirm_btn{
+  height:1.00rem;
+  line-height: 1.00rem;
+  text-align: center;
+  width:100%;
+  position: fixed;
+  bottom: 0;
+  border-top:solid 1px #e0e0e0;
+}
+.confirm_left{
+  width:60%;
+  text-align: right;
+}
+.confirm_right{
+  width: 30%;
+  height:100%;
+  background: #ffbc2c;
+}
+.choose_number{
+  height:1rem;
+}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <div class="w750">
+    <div class="manage w690 flex">
+        <!-- 没有选择地址 -->
+        <!-- <div class="address_blank font30 color6">添加地址</div> -->
+        <div class="manage_cont" @click="intoPath('userAddress')">
+            <div class="user_address flex color3">
+                <div class="address_left flex">
+                   李雷
+                </div>
+                <div class="address_right">
+                    1888888888888
+                </div>
+            </div>
+            <div class="address_infor flex">
+                <div class="infor_right avoidOverflow">陕西省西安市高新大都荟陕西省西安市高新大都荟陕西省西安市高新大都荟</div>
+            </div>
+        </div>
+    </div>
+    <div class="product">
+        <div class="product_box w690 flexRowBetween">
+            <div class="product_left">
+                <img src="images/img4@2x.png"/>
+            </div>
+            <div class="product_right">
+                <div class="product_detail">
+                    <div class="font32 color3 product_top">空间+导示</div>
+                    <div class="font24 color9">2018-09-09</div>
+                    <div class="font30 color6 product_price flex">¥189</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="choose_number w690 flexRowBetween">
+              <div class="number_txt">
+                数量
+              </div>
+              <div class="edit_number flexRowBetween">
+                <div class="minus" style="line-height:45rpx;border-right: solid 1px #e5e5e5;">-</div>
+                <div class="number">1</div>
+                <div class="add">+</div>
+              </div>
+            </div>
+    <div class="confirm_btn flexRowBetween font30">
+       <div class="confirm_left">合计:<span class="color_r"> 积分:56</span></div> 
+       <div class="confirm_right color1">提交订单</div> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      intoPath(url){
+        var into_url = url;
+        window.location.href=into_url+'.html'
+      },
+
+    } 
+
+});           
+</script>
+</body>
+</html>

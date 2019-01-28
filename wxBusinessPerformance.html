@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>我的业绩</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+.order_item{
+  width:1.4rem;
+  height:0.5rem;
+  border:solid 1px #e0e0e0;
+  border-radius:0.02rem;
+  float:right;
+  margin-top:0.3rem;
+  text-align: center;
+  line-height:0.5rem;
+}
+.tab_item{
+  width:28%;
+}
+.tab_this{
+  color:#212121;
+  border-bottom:solid 1px #212121;
+}
+.perfomence{
+  width:100%;
+  height:1rem;
+  border-radius:0.2rem;
+  margin-top:0.3rem;
+}
+.perfomence_item{
+  text-align: center;
+}
+.perfomence_item img{
+  width:0.14rem;
+  height:0.22rem;
+}
+</style>
+</head>
+<body style="background:#f2f2f2">
+
+<div id="app">
+  <div class="w750">
+    <div class="tab font30 flexRowBetween color6 bg1">
+        <div class="tab_item" @click="tab(0)">
+            <span :class="currentId == 0?'tab_this':''">已下单</span>
+        </div>
+        <div class="tab_item" @click="tab(1)">
+            <span :class="currentId == 1?'tab_this':''">我的库存</span>
+        </div>
+        <div class="tab_item" @click="tab(2)">
+            <span :class="currentId == 2?'tab_this':''">业绩规则</span>
+        </div>
+    </div>
+    <div class="w690" :style="currentId==0?'display:block':'display:none'">
+      <div class="perfomence bg1 flexRowBetween" @click="intoPath('BusinessOrderDetail')">
+        <div class="perfomence_item font28 color2" style="width:18%">
+          张三
+        </div>
+        <div class="perfomence_item font28 color2"  style="width:62%">
+          2018-9-9
+        </div>
+        <div class="perfomence_item font28 color2 flexRowBetween" style="width:20%;padding-right:3%;">
+          <p>2种</p>
+          <img src="images/next-page@2x.png"/>
+        </div>
+      </div>
+    </div>
+    <div class="bg1" :style="currentId==1?'display:block':'display:none'">
+      <div class="product">
+          <div class="product_box w710 flexRowBetween">
+              <div class="product_left">
+                  <img src="images/img4@2x.png">
+              </div>
+              <div class="product_right">
+                  <div class="product_detail">
+                      <div class="font32 color2 product_top">空间+导示</div>
+                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                      <div class="product_price flexRowBetween">
+                        <div class="font28 color6">X1</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="w690" :style="currentId==2?'display:block':'display:none'">
+      <div class="bg1 shadow1" style="margin-top:0.4rem;">
+        <p class="auth_tlt font28 color2">标题标题标题标题标题标题标题标题</p>
+        <div class="auth_cont font28 color6 w710">1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+          currentId:0
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+      const self= this;
+    },
+
+    methods:{
+      tab(url){
+        const self = this;
+        self.currentId = url;
+      },
+      intoPath(url){
+          var into_url = url;
+          window.location.href=into_url+'.html'
+      }
+    } 
+
+});           
+</script>
+</body>
+</html>
