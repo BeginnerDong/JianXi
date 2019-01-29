@@ -52,12 +52,29 @@
                   <p class="font20 color9">1212人下单</p>
               </div>
           </a>
+          <a class="recommend_left" @click="intoPath('detail')">
+              <img src="images/img4@2x.png"/>
+              <div class="product_name font28 color2">名称名称名称名称</div>
+              <div class="product_pro font24 flex">
+                  <p class="font24 color_r">积分:56</p>
+                  <p class="font20 color9">1212人下单</p>
+              </div>
+          </a>
+          <a class="recommend_left" @click="intoPath('detail')">
+              <img src="images/img4@2x.png"/>
+              <div class="product_name font28 color2">名称名称名称名称</div>
+              <div class="product_pro font24 flex">
+                  <p class="font24 color_r">积分:56</p>
+                  <p class="font20 color9">1212人下单</p>
+              </div>
+          </a>
         </div>
     </div>
+    <a class="shopping" @click="intoPath('shopping')">
+        <img src="images/icon1@2x.png"/>
+    </a>
 </div>
-<a class="shopping" href="">
-    <img src="images/icon1@2x.png"/>
-</a>
+
 <div class="solely" style="font-size:0.20rem;color:#666;text-align:center;height:0.8rem;line-height:0.8rem;">
     技术支持:西安纯粹科技
 </div>
@@ -110,8 +127,10 @@ var app = new Vue({
 
     methods:{
       intoPath(url){
-        var into_url = url;
-        window.location.href=into_url+'.html'
+          console.log(url);
+          var into_url = url;
+          console.log(into_url);
+          window.location.href=into_url+'.html'
       },
 
     } 

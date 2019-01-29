@@ -27,7 +27,7 @@
 <div id="app">
     <div class="w750">
         <div class="w690 index_product flexRowBetween">
-          <a class="recommend_left">
+          <a class="recommend_left" @click="intoPath('detail')">
               <img src="images/img4@2x.png"/>
               <div class="product_name font28 color2">名称名称名称名称</div>
               <div class="product_pro font24 flex">
@@ -35,7 +35,7 @@
                   <p class="font20 color9">1212人下单</p>
               </div>
           </a>
-          <a class="recommend_left">
+          <a class="recommend_left" @click="intoPath('detail')">
                <img src="images/img4@2x.png"/>
               <div class="product_name font28 color2">名称名称名称名称</div>
               <div class="product_pro font24 flex">
@@ -43,7 +43,7 @@
                   <p class="font20 color9">1212人下单</p>
               </div>
           </a>
-          <a class="recommend_left">
+          <a class="recommend_left" @click="intoPath('detail')">
                <img src="images/img4@2x.png"/>
               <div class="product_name font28 color2">名称名称名称名称</div>
               <div class="product_pro font24 flex">
@@ -74,7 +74,10 @@ var app = new Vue({
     },
 
     methods:{
-
+      intoPath(url){
+        var into_url = url;
+        window.location.href=into_url+'.html'
+      },
 
     } 
 

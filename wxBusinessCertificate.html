@@ -19,6 +19,7 @@
   .contact{
     text-align: center;
     width:100%;
+    position:relative;
   }
   .contact img{
     width:100%;
@@ -77,6 +78,37 @@
   height:1.6rem;
   line-height:1.6rem;
 }
+.input_name{
+  width:100%;
+  left:0;
+  position:absolute;
+  top:27%;
+}
+.input_wx{
+  width:100%;
+  left:0;
+  position:absolute;
+  top:37%;
+}
+.input_data{
+  width:80%;
+  left:0;
+  position:absolute;
+  top:73%;
+}
+.input_data input{
+  text-align:left;
+}
+input{
+  width:30%;
+  height:0.6rem;
+  line-height:0.6rem;margin:0 auto;
+  background:none;
+  border:0;
+  text-align: center;
+  color:#212121;
+}
+
 </style>
 </head>
 <body>
@@ -85,6 +117,9 @@
   <div class="w750" style="height:100vh">
      <div class="contact">   
       <img src="images/certificate-img.png"/>
+      <div class="input_name"><input placeholder="姓名" value="" /></div>
+      <div class="input_wx"><input placeholder="322323" value="" /></div>
+      <div class="input_data"><input placeholder="2018-9-9" value="" /></div>
      </div>
      <button class="submit_info" @click="send">续期</button>
      <div class="confirm color1" v-if="is_confirm">

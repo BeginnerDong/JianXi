@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>购物车</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+  #shopping{
+  padding.:0rem 4%;
+}
+.select_status{width:8%;height:1.52rem;line-height:1.52rem;}
+.select_status img{
+  width:.29rem;
+  height:.29rem;}
+.shopping_item{
+  width:100%;
+  height:2.30rem;
+  border-bottom:solid 1px #f5f5f5;
+  position:relative;
+  align-items:center;
+}
+.product_cont{
+  height:1.52rem;
+  width:100%;
+}
+.shopping_img{width:24%;height:1.52rem;text-align:left;}
+.shopping_img img{
+  width:1.52rem;
+  height:1.52rem;
+  
+}
+.edit_number{
+  width:34.6%;
+  height:.45rem;
+  line-height:.45rem;
+  border:solid 1px #e5e5e5;
+  font-size:.20rem;
+}
+.edit_number .minus,.edit_number .add{
+  width:.45rem;
+  text-align:center;
+  color:#aeaeae;
+  font-size:.40rem;
+
+}
+.number{
+  width:.72rem;
+  text-align:center;
+  color:#878787;
+  border-right:solid 1px #e5e5e5; 
+  border-left:solid 1px #e5e5e5;
+  }
+.shopping_name{
+  width:69%;
+  align-items:center;
+  overflow:hidden;
+  height:1.40rem;
+  padding-right:3%;
+}
+.shopping_name text{
+  display:block;
+}
+.shopping_name .text1{
+  font-size:.30rem;
+  color:#444;
+  
+}
+.shopping_name .text2{
+  font-size:.24rem;
+  color:#999;
+  height:40%;
+}
+.shopping_name .price{
+  font-size:.28rem;
+}
+.shopping_name text{
+  height:33.33%;
+  align-items:center;
+}
+.total{
+  width:100%;
+  height:1.10rem;
+  position:fixed;
+  bottom:1.10rem;
+  left.:0rem;
+  align-items:center;
+  background:#f2f2f2;
+  z-index:999;
+}
+.all_select img{
+  width:.29rem;
+  height:.29rem;
+}
+.total_price text{display:flex;}
+.select_c{
+  font-size:.28rem;
+  color:#444;
+}
+.del_shopping{font-size:.30rem;}
+.toalt1{font-size:.30rem;color:#333;}
+.priceNumber{
+  font-size:.28rem;
+}
+.submit_shopping{
+  width:1.60rem;
+  height:.60rem;
+  line-height:.60rem;
+  text-align:center;
+  border-radius:.20rem;
+}
+.submit_shopping button{
+  width:1.60rem;
+  height:.60rem;
+  color:#fff;
+  line-height: .60rem;
+  font-size:.30rem;
+  background:#ffbc2c;
+  border-radius:0.3rem;
+}
+.pay_note{
+  color:#fff;
+  font-size:.34rem;
+}
+.pay_note .text1{
+  font-size:.30rem;
+  color:#fff;
+}
+.pay_note .number_pay{
+  font-size:.24rem;
+  color:#fff;
+  margin-left:.10rem;
+
+}
+.edit_number input{
+  border:0;
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="w750">
+     <div id="shopping">
+        <div class="shopping_item flex w710">
+            <div class="flexRowBetween product_cont" style="align-items:center;position: relative;">
+                <div class="select_status" @click="choose(0)">
+                    <img :src="currentId==0?'images/select_a.png':'images/select.png'">
+                </div>
+                <div class="shopping_img">
+                    <img src="images/img4@2x.png">
+                </div>
+                <div class="shopping_name">
+                    <p class="text1 avoidOverflow">商品名称商品名称商品名称</p>
+                    <p class="text2 flex">商品属性</p>
+                    <div class="flexRowBetween">
+                      <p class="price color_r">积分：56</p>
+                      <div class="edit_number flexRowBetween">
+                          <div class="minus" style="font-size:.50rem;line-height:.36rem;" >-</div>
+                          <input class="number"/>
+                          <div class="add">+</div>
+                      </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="shopping_item flex w710">
+            <div class="flexRowBetween product_cont" style="align-items:center;position: relative;">
+                <div class="select_status"  @click="choose(1)">
+                    <img :src="currentId==1?'images/select_a.png':'images/select.png'">
+                </div>
+                <div class="shopping_img">
+                    <img src="images/img4@2x.png">
+                </div>
+                <div class="shopping_name">
+                    <p class="text1 avoidOverflow">商品名称商品名称商品名称</p>
+                    <p class="text2 flex">商品属性</p>
+                    <div class="flexRowBetween">
+                      <p class="price color_r">积分：56</p>
+                      <div class="edit_number flexRowBetween">
+                          <div class="minus" style="font-size:.50rem;line-height:.36rem;" >-</div>
+                          <input class="number"/>
+                          <div class="add">+</div>
+                      </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="total" style="display:flex;">
+            <div class="all_select" style="width:10%;text-align:center;;overflow:hidden;" @click="chooseAll">
+                <img :src="chooseAll?'images/select_a.png':'images/select.png'">
+            </div>
+            <div class="select_c"  style="width:10%;text-align:left;overflow:hidden;" >全选</div>
+            <div class="del_shopping color_r" style="width:10%;text-align:left;overflow:hidden;" bindtap="delete">
+                删除
+            </div>
+            <div class="toalt1"  style="width:20%;text-align:right;overflow:hidden;">
+                合计:
+            </div>
+            <div class="priceNumber color_r" style="width:20%;text-align:center;overflow:hidden;">
+            积分:56
+            </div>
+            <div class="" style="align-items:center;width:35%;text-align:center;overflow:hidden;">
+                <div class="submit_shopping"  style="margin:0rem auto;">
+                    <div class="submit_shopping" @click="intoPath('confirmOrder')">
+                        <button>结算(1)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+          currentId:0,
+          selectAll:false,
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      choose(url){
+        const self = this;
+        self.currentId = url;
+      },
+      chooseAll(){
+        const self = this;
+        self.chooseAll = !self.chooseAll;
+      },
+      intoPath(url){
+          console.log(url);
+          var into_url = url;
+          console.log(into_url);
+          window.location.href=into_url+'.html'
+      },
+    } 
+
+});           
+</script>
+</body>
+</html>
