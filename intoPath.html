@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="header">
+<title>简希</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+<meta name="keywords" content="简希">
+<meta name="description" content="简希">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/basic.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="js/rem.js"></script>
+<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
+<script src="js/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="js/base.js" type="application/javascript"></script>
+<style>
+  .entrance{
+    width:100%;
+    height:1rem;
+    position: fixed;
+    left:0;
+    bottom:0;
+    border-top:solid 1px #e0e0e0;
+  }
+  .entrance_item{
+    width:50%;
+    text-align: center;
+    line-height:1rem;
+    position:relative;
+  }
+  .second{
+    position:absolute;
+    left:0;
+    width:100%;
+    bottom:1rem;
+    display:none;
+  }
+  .second li{
+    width:80%;
+    border-top:solid 1px #e0e0e0;
+    height:0.8rem;
+    line-height:0.8rem;
+    text-align: center;
+    background:#fff;
+    margin:0 auto;
+  }
+</style>
+</head>
+<body style="background:#f2f2f2;">
+
+<div id="app">
+  <div class="w750" style="height:100vh">
+    <div class="entrance flex">
+      <div class="entrance_item" style="border-right:solid 1px #e0e0e0">
+        <div class="font28 color6" @click="tab(0)">用户登录</div>
+        <ul class="second" :style="is_select==0?'display:block':'display:none'">
+          <li class="font26 color6" @click="intoPath('index')">积分商城</li>
+          <li class="font26 color6" @click="intoPath('scan')">防伪查询</li>
+          <li class="font26 color6" @click="intoPath('user')">个人中心</li>
+        </ul>
+      </div>
+      <div class="entrance_item font28 color6">
+        <div class="font28 color6" @click="tab(1)">微商登录</div>
+        <ul class="second" :style="is_select==1?'display:block':'display:none'">
+          <li class="font26 color6" @click="intoPath('authorize')">授权查询</li>
+          <li class="font26 color6" @click="intoPath('wxBusinessLogin')">平台登录</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript " src="js/bootstrap.js"></script>
+<script type="text/javascript">          
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+          is_select:999,
+        }   
+
+    },
+    mounted () {
+		 
+	},
+    computed: {
+          
+    },
+    created: function () {
+            
+    },
+
+    methods:{
+      tab(id){
+        const self = this;
+        self.is_select = id;
+      },
+      intoPath(url){
+          console.log(url);
+          var into_url = url;
+          console.log(into_url);
+          window.location.href=into_url+'.html'
+      },
+    } 
+
+});           
+</script>
+</body>
+</html>

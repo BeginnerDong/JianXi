@@ -64,7 +64,7 @@
   height:1.36rem;
 }
 .funds_item{
-  width:50%;
+  width:33.33%;
   height:0.78rem;
   text-align: center;
 }
@@ -81,9 +81,10 @@
   height:1.88rem;
 }
 .business_item{
-  height:1rem;
+  height:1.2rem;
   width:20%;
   text-align: center;
+  position:relative;
 }
 .business_item img{
   width:0.58rem;
@@ -93,6 +94,22 @@
 .wxBusinessOrder{
  overflow: hidden;
   border-radius:0.2rem;
+}
+.number{
+  width:0.36rem;
+  height:0.36rem;
+  border-radius:50%;
+  text-align: center;
+  line-height:0.36rem;
+  background:#ffbc2c;
+  color:#fff;
+  font-size:0.2;
+  position: absolute;
+  right:0.1rem;
+  top:-0.1rem;
+}
+.infor_right img{
+  margin-top:0.4rem;
 }
 </style>
 </head>
@@ -130,7 +147,7 @@
           </p>
         </div>
       </div>
-      <div class="infor_right" @click="intoPath('wxBusinessInfor')">
+      <div class="infor_right" style="height:100%;" @click="intoPath('wxBusinessInfor')">
         <img src="images/pencile.png">
       </div>
     </div>
@@ -144,6 +161,12 @@
             </p>
             <p class="font28 color2">¥900</p>
           </div>
+          <div class="funds_item" style="border-right:solid 1px #e0e0e0;">
+            <p class="font28 color2">
+              业绩奖励
+            </p>
+            <p class="font28 color2">¥900</p>
+          </div>
           <div class="funds_item">
             <p class="font28 color2">
               余额
@@ -152,7 +175,7 @@
           </div>
         </div>
       </div>
-      <div class="wxBusinessOrder bg1">
+      <div class="wxBusinessOrder bg1" style="height:2.78rem;">
         <div class="funds_tlt w690 flexRowBetween" @click="intoPath('wxBusinessOrder')">
           <p class="font28 color1">我的订单</p>
           <div class="flex">
@@ -164,30 +187,35 @@
           <div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=0')">
             <img src="images/business-icon1.png"/>
             <p class="font28 color2">待付款</p>
+            <span class="number">1</span>
           </div>
           <div class="business_item"  @click="intoPath_a('wxBusinessOrder.html?id=1')">
             <img src="images/business-icon2.png"/>
             <p class="font28 color2">待发货</p>
+            <span class="number">1</span>
           </div>
           <div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=2')">
             <img src="images/business-icon3.png"/ >
             <p class="font28 color2">待收货</p>
+            <span class="number">1</span>
           </div>
           <div class="business_item"  @click="intoPath_a('wxBusinessOrder.html?id=3')">
             <img src="images/business-icon4.png"/>
             <p class="font28 color2">已完成</p>
+            <span class="number">1</span>
           </div>
           <div class="business_item"  @click="intoPath_a('wxBusinessOrder.html?id=4')">
             <img src="images/business-icon5.png"/>
             <p class="font28 color2">已撤销</p>
+            <span class="number">1</span>
           </div>
         </div>
       </div>
-       <div class="wxBusinessOrder bg1">
+      <div class="wxBusinessOrder bg1">
         <div class="funds_tlt w690 flexRowBetween">
           <p class="font28 color1">店铺管理</p>
         </div>
-        <div class="business_cont flex">
+        <div class="business_cont flex" style="height:2.4rem;">
           <div class="business_item" @click="intoPath('wxBusinessNext')">
             <img src="images/business-icon6.png"/>
             <p class="font28 color2">下属代理</p>
@@ -210,6 +238,7 @@
           </div>
         </div>
       </div>
+      <div class="submit_info" style="background:#ffbc2c;border-radius:0.4rem;margin-top:0.6rem;" @click="intoPath('shopping')">下单</div>
     </div>
   </div>
 </div>

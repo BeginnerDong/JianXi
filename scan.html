@@ -18,37 +18,110 @@
 </head>
 <body>
 <style>
-  .scan_img{
-    width:100%;
-    height:3.3rem;
-    margin-top:0.3rem;
-  }
-  .scan_img img{
+  .scan img{
     width:100%;
     height:100%;
   }
-  .product_price{
-    border-top:solid 1px #eee;
+  .scan_cont{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+  }
+  .scan_tlt{
+    font-size:0.78rem;
+    color:#fff;
+    text-align: center;
+    height:1.72rem;
+    line-height:1.72rem;
+  }
+  .scan_img{
+    text-align: center;
+    width:100%;
+  }
+  .scan_img img{
+    width:3.84rem;
+    height:3.04rem;
+    margin:0 auto;
+  }
+  .scan_end input{
+    width:96%;
+    height:0.7rem;
+    line-height:0.7rem;
+    padding-left:4%;
+    margin-top:0.49rem;
+    border-radius:0.1rem;
+    border:0;
+    z-index:1;
+  }
+  .notice{
+    margin-top:0.3rem;
+  }
+  .notice p{
+    line-height:0.42rem;
+  }
+  .submit_info{
+    position:absolute;
+    left:10%;
+    bottom:10%;
+    width:80%;
+    border-radius:0.1rem;
+    height:0.7rem;
+    line-height:0.7rem;
+    background:#ffbc2c;
+  }
+  .end_close{
+    background:#ffbc2c;
+    width:80%;
+    border-radius:0.1rem;
+    height:0.7rem;
+    line-height:0.7rem;
+    color:#fff;
+  }
+  .end{
+    position: absolute;
+    left:0;
+    top:30%;
+    padding:4%;
+    width:100%;
+  }
+  .end_cont{
+    border:solid 0.04rem #fff;
+    padding:4%;
+    background:rgba(0,0,0,0.8);
+    z-index:999;
   }
 </style>
 <div id="app">
     <div class="w750">
-        <div class="w690">
-           <div class="scan_img">
-               <img src="images/img-pic@2x.png"/>
-           </div>
-           <div class="sacn_tlt font28 color2">
-               商品名称
-           </div>
-           <p class="font28 color6">珀莱雅丝滑大红BB霜裸妆遮瑕</p>
-           <div class="sacn_tlt font28 color2" style="margin-top:0.4rem;border-top:solid 1px #eee;">
-               商品简介
-           </div>
-           <p class="font28 color6" style="margin-bottom:0.3rem;">内容内容内容内容内容内容内容内容内容内容内容内 内容内容内容内容内容内容。</p>
-           <div class="product_price flexRowBetween">
-               <p class="font28 color2">商品价格</p>
-               <p class="font28 color6">¥299</p>
-           </div>
+        <div class="scan" style="height:100vh;">
+           <img src="images/scan_bg.png">
+            <div class="scan_cont">  
+              <p class="scan_tlt">真伪查询</p>
+              <div class="scan_img">
+                <img src="images/scan.png"/>
+              </div>
+              <div class="scan_end w690">
+                <input value="8576767676666" />
+              </div>
+              <div class="notice w690">
+                <p class="font24 color_y">查询说明：</p>
+                <p class="font24 color_y">说明1说明1说明1说明1说明1说明1</p>
+                <p class="font24 color_y">说明1说明1说明1说明1说明1说明1说明1说明1说明1</p>
+                <p class="color1 font24" style="margin-top:0.3rem;">
+                  *注：只有产品最外面的包装
+                </p>
+                <button class="submit_info font30"  @click="end" style="background:#ffbc2c;">确认提交</button>
+              </div>
+            </div>
+            <div class="end" v-if="is_end">
+              <div class="end_cont color1 font28">
+                7012345612456233您所查询的是：玛丽黛佳系列彩妆，此号码为正品，纸正牌产品的标识。您查询的玛丽黛佳毅力持久眼线笔产品真伪，获得99积分。
+                <button class="end_close" @click="close" style="background:#ffbc2c;margin:0.4rem auto">关闭</button>
+              </div>
+              
+            </div>
         </div>
     </div>
 </div>
@@ -58,6 +131,7 @@ var app = new Vue({
     el: '#app',
     data: function() {
         return {
+          is_end:false,
         }   
 
     },
@@ -72,8 +146,14 @@ var app = new Vue({
     },
 
     methods:{
-
-
+      end(){
+        const self = this;
+        self.is_end = true
+      },
+      close(){
+        const self = this;
+        self.is_end = false
+      }
     } 
 
 });           
