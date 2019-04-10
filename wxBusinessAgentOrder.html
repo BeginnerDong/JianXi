@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>下级订单</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-.order_item{
+	<head id="header">
+		<title>下级订单</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.order_item{
   width:1.4rem;
   height:0.5rem;
   border:solid 1px #e0e0e0;
@@ -47,59 +47,144 @@
   height:0.22rem;
 }
 </style>
-</head>
-<body style="background:#f2f2f2">
+	</head>
+	<body style="background:#f2f2f2">
 
-<div id="app">
-  <div class="w750">
-    <div class="w690">
-      <div class="perfomence bg1 flexRowBetween" @click="intoPath('wxBusinessAgentDetail')">
-        <div class="perfomence_item font28 color2" style="width:18%">
-          张三
-        </div>
-        <div class="perfomence_item font28 color2"  style="width:62%">
-          2018-9-9
-        </div>
-        <div class="perfomence_item font28 color2 flexRowBetween" style="width:20%;padding-right:3%;">
-          <p>2种</p>
-          <img src="images/next-page@2x.png"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-          currentId:0
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="w690">
+					<div class="perfomence bg1 flexRowBetween" v-for="item in mainData" @click="intoPath('wxBusinessAgentDetail',item.id)">
+						<div class="perfomence_item font28 color2" style="width:18%">
+							{{item.user.name}}
+						</div>
+						<div class="perfomence_item font28 color2" style="width:62%">
+							{{item.create_time}}
+						</div>
+						<div class="perfomence_item font28 color2 flexRowBetween" style="width:20%;padding-right:3%;">
+							<p>{{item.products.length}}种</p>
+							<img src="images/next-page@2x.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						currentId: 0,
+						mainData: [],
+						paginate: {
+							count: 0,
+							currentPage: 1,
+							pagesize: 10,
+							is_page: true,
+						},
+						searchItem: {}
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-      const self= this;
-    },
+				},
+				mounted() {
+					window.addEventListener('scroll', this.handleScroll)
+				},
 
-    methods:{
-      tab(url){
-        const self = this;
-        self.currentId = url;
-      },
-      intoPath(url){
-          var into_url = url;
-          window.location.href=into_url+'.html'
-      }
-    } 
+				computed: {
+					// 计算属性的 getter
+					stringifyOrder: function() {
+						return JSON.stringify(this.order).replace(/\"/g, "");
+					}
+				},
+				created: function() {
+					const self = this;
 
-});           
-</script>
-</body>
+					var callback = (res) => {
+
+						self.getMainData()
+
+					};
+					window.base.getMerchantToken(callback);
+
+				},
+
+				methods: {
+
+					handleScroll() {
+						var wScrollY = window.scrollY; // 当前滚动条位置  
+						var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）  
+						var bScrollH = document.body.scrollHeight; // 滚动条总高度      
+						if ((wScrollY + wInnerH >= bScrollH) && !this.isLoadAll && !this.buttonClick) {
+							this.buttonClick = true;
+							this.paginate.currentPage++;
+							this.getMainData();
+						};
+					},
+
+					getMainData(isNew) {
+						const self = this;
+						if (isNew) {
+							self.paginate = {
+								count: 0,
+								currentPage: 1,
+								pagesize: 10,
+								is_page: true,
+							}
+						};
+						const postData = {};
+						postData.paginate = window.base.cloneForm(self.paginate);
+						postData.token = localStorage.getItem('merchant_token');
+						postData.searchItem = {
+							user_no:['not in',[localStorage.getItem('merchant_no')]],
+							agent_no: localStorage.getItem('merchant_no'),
+							user_type: 1
+						};
+						postData.order = {
+							create_time: 'desc'
+						};
+						postData.getAfter = {
+							user: {
+								tableName: 'UserInfo',
+								middleKey: 'user_no',
+								key: 'user_no',
+								searchItem: {
+									status: 1
+								},
+								condition: '=',
+								info: ['name']
+							}
+						};
+						const callback = (res) => {
+							if (res.solely_code == 100000) {
+								if (res.info.data.length > 0) {
+									self.mainData.push.apply(self.mainData, res.info.data);
+								} else {
+									self.isLoadAll = true;
+									alert('没有更多了');
+								};
+
+							} else {
+								alert('网络故障')
+							};
+
+
+							console.log('getMainData', self.mainData)
+						};
+						window.base.orderGet(postData, callback);
+					},
+
+
+					tab(url) {
+						const self = this;
+						self.currentId = url;
+					},
+					intoPath(url, id) {
+						var into_url = url;
+						window.location.href = into_url + '.html' + '?id=' + id
+					}
+				}
+
+			});
+		</script>
+	</body>
 </html>

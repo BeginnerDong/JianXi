@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head id="header">
+		<title>授权查询</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.login{
+  width:100%;
+  height:100vh;
+  position: relative;
+}
+.login img{
+  width:100%;
+  height:100%;
+}
+.login_box{
+  width:100%;
+  height:4.20rem;
+  border-radius:.16rem;
+  box-shadow:0 0 .60rem #d0d2d8;
+}
+.login_cont{
+  position: absolute;
+  left:0;
+  top:0;
+  height:100%;
+}
+.login_input{
+  width:72%;
+  margin:10% auto;
+}
+.list_input{
+  width:100%;
+  height:.98rem;
+  line-height:.98rem;
+  border-bottom:solid 1px #f0f0f0;
+  overflow: hidden;
+}
+.list_input input{
+  font-size:.24rem;
+  color:#666;
+  width:100%;
+  height:100%;
+  line-height:1.20rem;
+  border:0;
+}
+.get_check{
+  width:1.70rem;
+  height:.50rem;
+  text-align: center;
+  line-height:.50rem;
+  background: #e0e0e0;
+  color:#666;
+  font-size:.24rem;
+  border:0;
+}
+button{
+  border:0;
+}
+.submit_info{
+  height:0.8rem;
+  line-height:0.8rem;
+  width:100%;
+  margin:100rpx auto 0 auto;
+  margin-top:0.3rem;
+}
+.login_cont{
+  width:100%;
+}
+.contact{
+    text-align: center;
+    width:100%;
+    position:relative;
+  }
+  .contact img{
+    width:100%;
+    height:100%;
+    margin:0 auto;
+  }
+  .contact a{
+    display:block;
+    width:100%;
+    height:0.9rem;
+    text-align: center;
+    line-height:0.9rem;
+  }
+
+  .confirm{
+  width:60%;
+  height:2.5rem;
+  border-radius:0.3rem;
+  background:rgba(0,0,0,0.6);
+  position:absolute;
+  left:20%;
+  top:40%;
+  text-align: center;
+}
+.confirm_cont{
+  width:100%;
+  height:100%;
+  position: relative;
+}
+.confirm_cont img{
+  width:0.36rem;
+  height:0.36rem;
+  position: absolute;
+  right:-0.08rem;
+  top:-0.08rem;
+}
+.confirm_btn{
+  width:1.2rem;
+  height:0.5rem;
+  line-height:0.5rem;
+  text-align: center;
+  border-radius:0.3rem;
+  background:#fff;
+  margin:0 0.2rem;
+}
+.confirm_tlt{
+  height:1.6rem;
+  line-height:1.6rem;
+}
+.input_name{
+  width:100%;
+  left:0;
+  position:absolute;
+  top:28%;
+}
+.input_wx{
+  width:100%;
+  left:0;
+  position:absolute;
+  top:38%;
+ 
+}
+.input_data{
+  width:80%;
+  left: -3px;
+  position:absolute;
+  top:75%;
+  font-size:12px
+}
+.input_no{
+  width:80%;
+  left:3%;
+  position:absolute;
+  top:72%;
+   font-size:12px
+}
+.input_data input{
+  text-align:left;
+}
+.input_level{
+  width:100%;
+  left:0;
+  position:absolute;
+  top:47%;
+  font-size:12px
+}
+input{
+  width:30%;
+  height:0.6rem;
+  line-height:0.6rem;margin:0 auto;
+  background:none;
+  border:0;
+  text-align: center;
+  color:#212121;
+}
+</style>
+	</head>
+	<body>
+
+		<div id="app">
+			<div class="w750 flex" style="height:100vh" >
+				<div class="login">
+					<!-- <img src="images/login.jpg" /> -->
+					<div class="w690 flex login_cont">
+						<div class="login_box bg1" v-if="isCheck==''">
+							<div class="login_input">
+								<div class="list_input">
+									<input placeholder="请输入你要查询的微信号" value="" v-model="submitData.wechat"></input>
+								</div>
+								
+								<button class="submit_info" @click="submit" style="margin-top:0.8rem;">查询</button>
+							</div>
+						</div>
+						
+						<div class="login_box bg1" v-if="isAgent=='no'" style="text-align: center;">
+							<img src="images/no.png" style="width: 1rem; margin-top: 0.3rem;height: 1rem;" />
+
+							<p style="margin-top: 0.6rem;">该用户[{{submitData.wechat}}]不是代理</p>
+							<button class="submit_info" @click="close" style="width:90%;margin: 0 auto;margin-top:0.6rem;">我知道了</button>
+						</div>
+						
+						<div class="w750" style="height:100vh" v-if="isAgent=='yes'">
+							<div class="contact">
+								<img src="images/certificate-img.png" />
+								<div class="input_name">{{mainData&&mainData.name?mainData.name:''}}</div>
+								<div class="input_wx">{{mainData&&mainData.wechat?mainData.wechat:''}}</div>
+								<div class="input_level" v-if="mainData&&mainData.level==1">联创</div>
+								<div class="input_level" v-if="mainData&&mainData.level==2">品牌官方</div>
+								<div class="input_level" v-if="mainData&&mainData.level==3">大区主管</div>
+								<div class="input_level" v-if="mainData&&mainData.level==4">经销商</div>
+								<div class="input_level" v-if="mainData&&mainData.level==5">VIP</div>
+								<div class="input_no">{{mainData.user_no}}</div>
+								<div class="input_data">{{end_time}}</div>
+							</div>
+							<button class="submit_info" @click="close">我知道了</button>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						submitData: {
+							wechat:''
+						},
+						isCheck:'',
+						isAgent:'',
+						end_time:''
+					}
+
+				},
+				mounted() {
+
+				},
+				computed: {
+
+				},
+				created: function() {
+					var callback = (res) => {
+					
+						this.getMainData()
+					
+					};
+					window.base.getUserToken(callback);
+				},
+
+				methods: {
+
+					
+					getMainData() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('user_token'),
+							thirdapp_id: 2
+						};
+					
+						const callback = (res) => {
+							
+							
+						}
+						window.base.userGet(postData, callback);
+					},
+					
+					submit() {
+						const self = this;
+						console.log(self.submitData)
+						const pass = window.base.checkComplete(self.submitData);
+						if (pass) {
+							self.userGet()
+						} else {
+							alert('请输入微信号查询');
+						};
+					},
+					
+					userGet() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('user_token'),
+							thirdapp_id: 2
+						};
+						postData.searchItem = {
+							 wechat:self.submitData.wechat,
+							 behavior:2,
+							 user_type:1
+						};
+						const callback = (res) => {
+							self.isCheck = 'yes';
+							if (res.info.data.length > 0) {
+							
+								self.isAgent= 'yes';
+								self.mainData = res.info.data[0];
+								
+								self.end_time = window.base.timestampToTime(self.mainData.end_time)
+							} else {
+								
+								self.isAgent = 'no'
+							}
+							console.log('self.isAgent',self.isAgent)
+							console.log('self.isCheck',self.isCheck)
+						}
+						window.base.userInfoGet(postData, callback);
+					},
+					
+					close(){
+						const self = this;
+						self.isCheck = '';
+						self.isAgent = '';
+						self.submitData.wechat=''
+					},
+							
+
+					intoPath(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html'
+					}
+
+				}
+
+			});
+		</script>
+	</body>
+</html>

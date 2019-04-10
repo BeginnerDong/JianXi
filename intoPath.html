@@ -65,14 +65,14 @@
         <div class="font28 color6" @click="tab(1)">微商登录</div>
         <ul class="second" :style="is_select==1?'display:block':'display:none'">
           <li class="font26 color6" @click="intoPath('authorize')">授权查询</li>
-          <li class="font26 color6" @click="intoPath('wxBusinessLogin')">平台登录</li>
+          <li class="font26 color6" @click="intoPath('login')">平台登录</li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
+<script type="text/babel">        
 var app = new Vue({
     el: '#app',
     data: function() {

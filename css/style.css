@@ -239,7 +239,7 @@
 }
 .product_detail{
     width:100%;
-    height:1.40rem;
+    height:1.78rem;
 }
 .product_left{
     width:27.5%;
@@ -274,7 +274,7 @@
     border-bottom:solid 1px #e0e0e0;
 }
 .tlt_left{
-    width:50%;
+    
     overflow:hidden;
     font-size:.26rem;
 }
@@ -550,4 +550,9 @@
     padding:0;
     margin:0;
     border-radius:0;
+}
+p img {
+	width:100%;
+	
+	overflow:hidden;
 }

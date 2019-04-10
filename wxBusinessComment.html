@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>评价</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-</style>
-</head>
-<body>
-<style>
-    .comment_tlt{
+	<head id="header">
+		<title>评价</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+		</style>
+	</head>
+	<body>
+		<style>
+			.comment_tlt{
         height:0.96rem;
         line-height:0.96rem;
     }
@@ -46,70 +46,104 @@
         color:#fff;
     }
 </style>
-<div id="app">
-  <div class="w750">
-    <div class="product">
-        <div class="order_tlt w710 flexRowBetween ">
-            <div class="tlt_left color2">交易时间：2018-09-20</div>
-            <div class="tlt_left tlt_right color_r">已完成</div>
-        </div>
-        <div class="product_box w710 flexRowBetween">
-            <div class="product_left">
-                <img src="images/img4@2x.png">
-            </div>
-            <div class="product_right">
-                <div class="product_detail">
-                    <div class="font32 color2 product_top">空间+导示</div>
-                    <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                    <div class="product_price flexRowBetween">
-                      <div class="font28 color6">X1</div>
-                      <div class="font30 color_r">积分:56</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w690">
-            <div class="comment_tlt font28 color6">
-                填写评价
-            </div>
-            <div class="comment_cont">
-                <textarea placeholder="请写下您对这次交易的看法"></textarea>
-            </div>
-            <button class="submit_info">提交</button>
-        </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-          currentId:0
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="product">
+					<div class="order_tlt w710 flexRowBetween ">
+						<div class="tlt_left color2">交易时间：2018-09-20</div>
+						<div class="tlt_left tlt_right color_r">已完成</div>
+					</div>
+					<div class="product_box w710 flexRowBetween">
+						<div class="product_left">
+							<img src="images/img4@2x.png">
+						</div>
+						<div class="product_right">
+							<div class="product_detail">
+								<div class="font32 color2 product_top">空间+导示</div>
+								<div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+								<div class="product_price flexRowBetween">
+									<div class="font28 color6">X1</div>
+									<div class="font30 color_r">积分:56</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w690">
+						<div class="comment_tlt font28 color6">
+							填写评价
+						</div>
+						<div class="comment_cont">
+							<textarea placeholder="请写下您对这次交易的看法"></textarea>
+						</div>
+						<button class="submit_info">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						currentId: 0,
+						mainData: []
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+				},
+				mounted() {
 
-    methods:{
-      tab(url){
-        const self = this;
-        self.currentId = url;
-        console.log(999,self.currentId);
-      }
+				},
+				computed: {
 
-    } 
+				},
+				created: function() {
+					var callback = (res) => {
 
-});           
-</script>
-</body>
+						this.getMainData();
+
+					};
+					window.base.getUserToken(callback);
+				},
+
+				methods: {
+
+
+
+					getMainData() {
+						const self = this;
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+						postData.searchItem = {
+							id: window.base.GetRequest().id
+						};
+						postData.order = {
+							create_time: 'desc'
+						};
+						const callback = (res) => {
+							if (res.solely_code == 100000) {
+								if (res.info.data.length > 0) {
+									self.mainData = res.info.data[0];
+								} else {
+									alert('数据传递错误');
+								};
+							} else {
+								alert('网络故障')
+							};
+							console.log('getMainData', self.mainData)
+						};
+						window.base.orderItemGet(postData, callback);
+					},
+
+					tab(url) {
+						const self = this;
+						self.currentId = url;
+						console.log(999, self.currentId);
+					}
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

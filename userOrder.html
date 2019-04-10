@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>我的订单</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-.order_item{
+	<head id="header">
+		<title>我的订单</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.order_item{
   width:1.4rem;
   height:0.5rem;
   border:solid 1px #e0e0e0;
@@ -27,248 +27,256 @@
   line-height:0.5rem;
 }
 </style>
-</head>
-<body>
+	</head>
+	<body>
 
-<div id="app">
-  <div class="w750">
-    <div class="tab font30 flexRowBetween color6">
-        <div class="tab_item" @click="tab(0)">
-            <span :class="currentId == 0?'tab_this':''">全部</span>
-        </div>
-        <div class="tab_item" @click="tab(1)">
-            <span :class="currentId == 1?'tab_this':''">待付款</span>
-        </div>
-        <div class="tab_item" @click="tab(2)">
-            <span :class="currentId == 2?'tab_this':''">待发货</span>
-        </div>
-        <div class="tab_item" @click="tab(3)">
-            <span :class="currentId == 3?'tab_this':''">待收货</span>
-        </div>
-        <div class="tab_item" @click="tab(4)">
-            <span :class="currentId == 4?'tab_this':''">已完成</span>
-        </div>
-        <div class="tab_item" @click="tab(5)">
-            <span :class="currentId == 5?'tab_this':''">已撤销</span>
-        </div>
-    </div>
-    <div v-if="currentId==0">
-      <div class="product">
-          <div class="order_tlt w710 flexRowBetween ">
-              <div class="tlt_left color2">交易时间：2018-09-20</div>
-              <div class="tlt_left tlt_right color_r">等待发货</div>
-          </div>
-          <div class="product_box w710 flexRowBetween">
-              <div class="product_left">
-                  <img src="images/img4@2x.png">
-              </div>
-              <div class="product_right">
-                  <div class="product_detail">
-                      <div class="font32 color2 product_top">空间+导示</div>
-                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                      <div class="product_price flexRowBetween">
-                        <div class="font28 color6">X1</div>
-                        <div class="font30 color_r">积分:56</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="order_handle w690">
-            <div class="order_item font28 color2">取消订单</div>
-          </div>
-      </div>
-      <div class="product">
-          <div class="order_tlt w710 flexRowBetween ">
-              <div class="tlt_left color2">交易时间：2018-09-20</div>
-              <div class="tlt_left tlt_right color_r">等待发货</div>
-          </div>
-          <div class="product_box w710 flexRowBetween">
-              <div class="product_left">
-                  <img src="images/img4@2x.png">
-              </div>
-              <div class="product_right">
-                  <div class="product_detail">
-                      <div class="font32 color2 product_top">空间+导示</div>
-                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                      <div class="product_price flexRowBetween">
-                        <div class="font28 color6">X1</div>
-                        <div class="font30 color_r">积分:56</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="order_handle w690">
-            <div class="order_item font28 color2" @click="intoPath('wxBusinessComment')">去评价</div>
-          </div>
-      </div>
-    </div>
-    <div v-if="currentId==1">
-      <div class="product">
-          <div class="order_tlt w710 flexRowBetween ">
-              <div class="tlt_left color2">交易时间：2018-09-20</div>
-              <div class="tlt_left tlt_right color_r">等待发货</div>
-          </div>
-          <div class="product_box w710 flexRowBetween">
-              <div class="product_left">
-                  <img src="images/img4@2x.png">
-              </div>
-              <div class="product_right">
-                  <div class="product_detail">
-                      <div class="font32 color2 product_top">空间+导示</div>
-                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                      <div class="product_price flexRowBetween">
-                        <div class="font28 color6">X1</div>
-                        <div class="font30 color_r">积分:56</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="order_handle w690">
-            <div class="order_item font28 color2">待付款</div>
-          </div>
-      </div>
-    </div>
-    <div v-if="currentId==2">
-      <div class="product">
-          <div class="order_tlt w710 flexRowBetween ">
-              <div class="tlt_left color2">交易时间：2018-09-20</div>
-              <div class="tlt_left tlt_right color_r">等待发货</div>
-          </div>
-          <div class="product_box w710 flexRowBetween">
-              <div class="product_left">
-                  <img src="images/img4@2x.png">
-              </div>
-              <div class="product_right">
-                  <div class="product_detail">
-                      <div class="font32 color2 product_top">空间+导示</div>
-                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                      <div class="product_price flexRowBetween">
-                        <div class="font28 color6">X1</div>
-                        <div class="font30 color_r">积分:56</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="order_handle w690">
-            <div class="order_item font28 color2">待发货</div>
-          </div>
-      </div>
-    </div>
-    <div v-if="currentId==3">
-      <div class="product">
-          <div class="order_tlt w710 flexRowBetween ">
-              <div class="tlt_left color2">交易时间：2018-09-20</div>
-              <div class="tlt_left tlt_right color_r">等待发货</div>
-          </div>
-          <div class="product_box w710 flexRowBetween">
-              <div class="product_left">
-                  <img src="images/img4@2x.png">
-              </div>
-              <div class="product_right">
-                  <div class="product_detail">
-                      <div class="font32 color2 product_top">空间+导示</div>
-                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                      <div class="product_price flexRowBetween">
-                        <div class="font28 color6">X1</div>
-                        <div class="font30 color_r">积分:56</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="order_handle w690">
-            <div class="order_item font28 color2">待收货</div>
-          </div>
-      </div>
-    </div>
-    <div v-if="currentId==4">
-      <div class="product">
-          <div class="order_tlt w710 flexRowBetween ">
-              <div class="tlt_left color2">交易时间：2018-09-20</div>
-              <div class="tlt_left tlt_right color_r">等待发货</div>
-          </div>
-          <div class="product_box w710 flexRowBetween">
-              <div class="product_left">
-                  <img src="images/img4@2x.png">
-              </div>
-              <div class="product_right">
-                  <div class="product_detail">
-                      <div class="font32 color2 product_top">空间+导示</div>
-                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                      <div class="product_price flexRowBetween">
-                        <div class="font28 color6">X1</div>
-                        <div class="font30 color_r">积分:56</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="order_handle w690">
-            <div class="order_item font28 color2">已完成</div>
-          </div>
-      </div>
-    </div>
-    <div v-if="currentId==5">
-      <div class="product">
-          <div class="order_tlt w710 flexRowBetween ">
-              <div class="tlt_left color2">交易时间：2018-09-20</div>
-              <div class="tlt_left tlt_right color_r">已撤销</div>
-          </div>
-          <div class="product_box w710 flexRowBetween">
-              <div class="product_left">
-                  <img src="images/img4@2x.png">
-              </div>
-              <div class="product_right">
-                  <div class="product_detail">
-                      <div class="font32 color2 product_top">空间+导示</div>
-                      <div class="font24 color9 avoidOverflow">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                      <div class="product_price flexRowBetween">
-                        <div class="font28 color6">X1</div>
-                        <div class="font30 color_r">积分:56</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="order_handle w690">
-            <div class="order_item font28 color2">已撤销</div>
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-          currentId:0
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="tab font30 flexRowBetween color6">
+					<div class="tab_item" @click="tab(0)">
+						<span :class="currentId == 0?'tab_this':''">全部</span>
+					</div>
+					<div class="tab_item" @click="tab(1)">
+						<span :class="currentId == 1?'tab_this':''">待兑换</span>
+					</div>
+					<div class="tab_item" @click="tab(2)">
+						<span :class="currentId == 2?'tab_this':''">待发货</span>
+					</div>
+					<div class="tab_item" @click="tab(3)">
+						<span :class="currentId == 3?'tab_this':''">待收货</span>
+					</div>
+					<div class="tab_item" @click="tab(4)">
+						<span :class="currentId == 4?'tab_this':''">已完成</span>
+					</div>
+					<div class="tab_item" @click="tab(5)">
+						<span :class="currentId == 5?'tab_this':''">已撤销</span>
+					</div>
+				</div>
+				<div>
+					<div class="product" v-for="(item,index) in mainData">
+						<div class="order_tlt w710 flexRowBetween ">
+							<div class="tlt_left color2">交易时间：{{item.create_time}}</div>
+							<div class="tlt_left tlt_right color_r"  v-if="item.pay_status == '0'">
+							   等待买家付款
+							</div>
+							<div class="tlt_left tlt_right color_r"  v-if="item.order_step=='3'">
+							已完成
+							</div>
+							<div class="tlt_left tlt_right color_r"  v-if="item.pay_status == '1'&&item.order_step=='0'&&item.transport_status =='1'">
+							物流配送中
+							</div>
+							<div class="tlt_left tlt_right color_r" v-if="item.pay_status==1&&item.transport_status =='0'&&item.order_step =='0'">
+								等待发货
+							</div>
+						</div>
+						<div class="product_box w710 flexRowBetween" style="border-bottom: 1px solid #e0e0e0;" v-for="c_item in mainData[index].products">
+							<div class="product_left">
+								<img :src="c_item.snap_product&&c_item.snap_product.mainImg&&c_item.snap_product.mainImg[0].url?c_item.snap_product.mainImg[0].url:''">
+							</div>
+							<div class="product_right">
+								<div class="product_detail">
+									<div class="font32 color2 product_top">
+										{{c_item.snap_product&&c_item.snap_product.title?c_item.snap_product.title:''}}
+										
+									</div>
+									<div class="font24 color9 avoidOverflow">
+										{{c_item.snap_product&&c_item.snap_product.description?c_item.snap_product.description:''}}
+									</div>
+									<div class="product_price flexRowBetween">
+										<div class="font28 color6">
+											X{{c_item.count}}
+										</div>
+										<div class="font30 color_r">
+											积分:{{c_item.snap_product&&c_item.snap_product.price?c_item.snap_product.price:''}}
+										</div>
+										<div class="order_handle w690" v-if="item.pay_status==1&&item.transport_status==2&&c_item.isremark==0">
+											<div class="order_item font28 color2" @click="intoPath('userOrderComment',c_item.id)" >去评价</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						<div class="order_handle w690" >
+							<div class="order_item font28 color_r"  style="width:3.4rem">订单总积分:{{item.price}}</div>
+						</div>
+						<div class="order_handle w690" v-if="item.pay_status==0&&item.transport_status==0&&item.status==1">
+							<div class="order_item font28 color2" @click="deleteOrder" :data-id="item.id">取消订单</div>
+						</div>
+						<div class="order_handle w690" v-if="item.pay_status==1&&item.transport_status==1">
+							<div class="order_item font28 color2" @click="orderUpdate" :data-id="item.id">确认收货</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						currentId: 0,
+						mainData: [],
+						paginate: {
+							count: 0,
+							currentPage: 1,
+							pagesize: 10,
+							is_page: true,
+						},
+						searchItem:{}
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-      const self= this;
-      self.currentId = window.base.GetRequest();
+				},
+				mounted() {
+					window.addEventListener('scroll', this.handleScroll)
+				},
+				
+				computed: {
+					// 计算属性的 getter
+					stringifyOrder: function() {
+						return JSON.stringify(this.order).replace(/\"/g, "");
+					}
+				},
+				
+				created: function() {
+					const self = this;
+					if (window.base.GetRequest().id) {
+						self.currentId = window.base.GetRequest().id;
+					}
+					var callback = (res)=>{
+					  
+					  self.getMainData()
+					  
+					};
+					window.base.getUserToken(callback);
+					
+				},
 
-    },
+				methods: {
+					
+					handleScroll() {
+						var wScrollY = window.scrollY; // 当前滚动条位置  
+						var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）  
+						var bScrollH = document.body.scrollHeight; // 滚动条总高度      
+						if ((wScrollY + wInnerH >= bScrollH) && !this.isLoadAll && !this.buttonClick) {
+							this.buttonClick = true;
+							this.paginate.currentPage++;
+							this.getMainData();
+						};
+					},
 
-    methods:{
-      tab(url){
-        const self = this;
-        self.currentId = url;
-      },
-      intoPath(url){
-          var into_url = url;
-          window.location.href=into_url+'.html'
-      }
+					getMainData(isNew) {
+						const self = this;
+						if (isNew) {
+							self.paginate = {
+								count: 0,
+								currentPage: 1,
+								pagesize: 10,
+								is_page: true,
+							}
+						};
+						const postData = {};
+						postData.paginate = window.base.cloneForm(self.paginate);
+						postData.token=localStorage.getItem('user_token');
+						postData.searchItem = window.base.cloneForm(self.searchItem);
+						postData.searchItem.user_no= localStorage.getItem('user_no');
+						postData.order = {
+							create_time: 'desc'
+						};
+						const callback = (res) => {
+							if (res.solely_code == 100000) {
+								if (res.info.data.length > 0) {
+									self.mainData.push.apply(self.mainData, res.info.data);
+								} else {
+									self.isLoadAll = true;
+									alert('没有更多了');
+								};
 
-    } 
+							} else {
+								alert('网络故障')
+							};
+							
+							
+							console.log('getMainData', self.mainData)
+						};
+						window.base.orderGet(postData, callback);
+					},
 
-});           
-</script>
-</body>
+					deleteOrder(e) {
+						const self = this;
+						const postData = {};
+						postData.token = localStorage.getItem('user_token');
+						postData.searchItem = {};
+						postData.searchItem.id = window.base.getDataSet(e, 'id').id;
+						const callback = res => {
+							if (res.solely_code == 100000) {
+								self.mainData = [];
+								self.getMainData(true);
+							}
+					
+						};
+						window.base.orderDelete(postData, callback);
+					},
+
+					orderUpdate(e) {
+						const self = this;
+						var index = window.base.getDataSet(e, 'index');
+						console.log('index', index)
+						const postData = {};
+						postData.token = localStorage.getItem('user_token');
+						postData.data = {
+							transport_status: 2,
+						}
+						postData.searchItem = {};
+						postData.searchItem.id = window.base.getDataSet(e, 'id').id;
+					
+						const callback = res => {
+							alert('已收货')
+							self.mainData = [];
+							self.getMainData(true);
+						};
+						window.base.orderUpdate(postData, callback);
+					},
+
+
+					tab(currentId) {
+						const self = this;
+						self.currentId = currentId;
+						self.searchItem = {};
+						if (currentId == '0') {
+					
+						} else if (currentId == '1') {
+							self.searchItem.pay_status = '0';
+					
+						} else if (currentId == '2') {
+							self.searchItem.pay_status = '1';
+							self.searchItem.transport_status = ['in', [0]];
+						} else if (currentId == '3') {
+							self.searchItem.pay_status = '1';
+							self.searchItem.transport_status = ['in', [1]];
+					
+						} else if (currentId == '4') {
+							self.searchItem.pay_status = '1';
+							self.searchItem.transport_status = '2';
+					
+						} else if (currentId == '5') {
+							self.searchItem.status = ['in', [-1]]
+						};
+						self.mainData = [];
+						self.getMainData(true);
+					
+					},
+
+					intoPath(url,id) {
+						var into_url = url;
+						window.location.href = into_url + '.html'+'?id='+id
+					}
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

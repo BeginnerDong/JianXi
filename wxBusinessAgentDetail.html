@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>我的订单</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-.order_item{
+	<head id="header">
+		<title>我的订单</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.order_item{
   width:1.4rem;
   height:0.5rem;
   border:solid 1px #e0e0e0;
@@ -50,92 +50,432 @@
   right:-0.08rem;
   top:-0.08rem;
 }
+.handle{
+	background:#fff;overflow:hidden;padding-bottom:30rpx;
+	margin-bottom:30rpx;
+	border-bottom:solid 1px #ececec;
+	width:100%
+}
+.order_left image{
+	width:160rpx;
+	height:160rpx;
+}
+.order_name{
+	width:66%;
+	height:160rpx;
+	}
+.order_name .text1{
+	font-size:32rpx;
+	height:50%;
+
+}
+.orders{
+	height:50%;
+	align-items:center;
+	font-size:28rpx;
+	color:#808080;
+}
+.order_type{
+	width:340rpx;
+}
+.total_money{
+	font-size:28rpx;
+	color:#666;
+}
+.total_money .text2{
+	font-size:28rpx;
+	color:#21c3d4;
+	margin-left:10rpx;
+	font-weight:bold;
+}
+.user_discount{
+	color:#262626;
+	font-size:24rpx;
+}
+.handle_order{
+	clear:both;
+	width:100%;
+	float:right;
+	padding: 0 0.2rem;
+	height:0.8rem;
+	line-height:0.8rem;
+}
+.handle_orders{
+
+
+	text-align:center;
+	height:0.3rem;
+	font-size:28rpx;
+	color:#636363;
+	float:right;
+	margin:0 0.1rem;
+}
 </style>
-</head>
-<body style="min-height:100%;">
+	</head>
+	<body style="min-height:100%;">
 
-<div id="app" style="min-height:100vh;">
-  <div class="w750" style="min-height:100%;">
-    <div class="product">
-        <div class="order_tlt w710 flexRowBetween ">
-            <div class="tlt_left color2">张三</div>
-            <div class="tlt_left tlt_right color6">订单号：545874646</div>
-        </div>
-        <div class="product_box w710 flexRowBetween">
-            <div class="product_left">
-                <img src="images/img4@2x.png">
-            </div>
-            <div class="product_right">
-                <div class="product_detail">
-                    <div class="font32 color2 product_top">空间+导示</div>
-                    <div class="font24 color9 avoidOverflow" style="margin:0.1rem 0">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                    <div class="product_price flexRowBetween">
-                      <div class="font28 color6">X1</div>
-                      <div class="font30 color_r">¥560</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="order_handle w690"> 
-          <div class="order_item font28 color6" style="width:30%;" @click="send">订单移交总部</div>
-          <div class="order_item font28 color6" @click="send">自己发货</div>
-        </div>
-    </div>
-    <div class="confirm color1" v-if="is_confirm">
-      <div class="confirm_cont">
-        <div class="confirm_tlt font28 color1">是否续期 1 年</div>
-        <img src="images/close_a.png" @click="close"/>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-          currentId:0,
-          is_confirm:false,
-        }   
+		<div id="app" style="min-height:100vh;">
+			<div class="w750" style="min-height:100%;">
+				<div class="product">
+					<div class="order_tlt w710 flexRowBetween ">
+						<div class="tlt_left color2">
+							代理名称：{{mainData&&mainData.user&&mainData.user.name?mainData.user.name:''}}
+						</div>
+						<div class="tlt_left tlt_right color6">
+							订单号：{{mainData.order_no}}
+						</div>
+					</div>
+					<div class="order_tlt w710 flexRowBetween ">
+						<div class="tlt_left color2">
+							收货人：{{mainData&&mainData.snap_address&&mainData.snap_address.name?mainData.snap_address.name:''}}
+						</div>
+						<div class="tlt_left tlt_right color2">
+							收货电话：{{mainData&&mainData.snap_address&&mainData.snap_address.phone?mainData.snap_address.phone:''}}
+						</div>
+					</div>
+					<div class="order_tlt w710 flexRowBetween ">
+						<div class="tlt_left color2">
+							收货地址：{{mainData&&mainData.snap_address&&mainData.snap_address.city?mainData.snap_address.city:''}}{{mainData&&mainData.snap_address&&mainData.snap_address.detail?mainData.snap_address.detail:''}}
+						</div>
+					</div>
+					<div v-for="(item,index) in mainData.products">
+						<div class="product_box w710 flexRowBetween" style="border-bottom:1px solid #ececec;">
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-      const self= this;
-      self.tab(url);  
-    },
+							<div class="product_left">
+								<img :src="item.snap_product&&item.snap_product.mainImg&&item.snap_product.mainImg[0].url?item.snap_product.mainImg[0].url:''">
+							</div>
+							<div class="product_right">
 
-    methods:{
-      tab(url){
-        const self = this;
-        into_url = window.base.GetRequest();
-        if(url){
-          self.currentId = url;
-        }else{
-          self.currentId = into_url
-        }
-      },
-      intoPath(url){
-          var into_url = url;
-          window.location.href=into_url+'.html'
-      },
-      send(){
-        const self  = this;
-        self.is_confirm = !self.is_confirm;
-      }, 
-      close(){
-        const self  = this;
-        self.is_confirm = false;
-      },
-    } 
+								<div class="product_detail">
+									<div class="font32 color2 product_top">
+										{{item.snap_product&&item.snap_product.title?item.snap_product.title:''}}
+									</div>
+									<div class="font24 color9 avoidOverflow" style="margin:0.1rem 0">
+										{{item.snap_product&&item.snap_product.description?item.snap_product.description:''}}
+									</div>
+									<div class="product_price flexRowBetween">
+										<div class="font28 color6">X{{item.count}}</div>
+										<div class="font30 color_r" v-if="mainData.user.level==1">
+											¥{{item.snap_product&&item.snap_product.price_one?item.snap_product.price_one:''}}
+										</div>
+										<div class="font30 color_r" v-if="mainData.user.level==2">
 
-});           
-</script>
-</body>
+											¥{{item.snap_product&&item.snap_product.price_two?item.snap_product.price_two:''}}
+										</div>
+										<div class="font30 color_r" v-if="mainData.user.level==3">
+
+											¥{{item.snap_product&&item.snap_product.price_three?item.snap_product.price_three:''}}
+
+										</div>
+										<div class="font30 color_r" v-if="mainData.user.level==4">
+
+											¥{{item.snap_product&&item.snap_product.price_four?item.snap_product.price_four:''}}
+										</div>
+										<div class="font30 color_r" v-if="mainData.user.level==5">
+
+											¥{{item.snap_product&&item.snap_product.price_five?item.snap_product.price_five:''}}
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<!-- <div class="order_handle" v-if="mainData.pay_status==1&&item.transport_status==0&&item.deliver_type==1" style="width:30%">
+							<div class="order_item font28 color6" @click="orderItemUpdateTwo" :data-index="index">移交总部</div>
+							<div class="order_item font28 color6" @click="orderItemUpdate" :data-index="index">自己发货</div>
+						</div>
+						<div class="order_handle" v-if="mainData.pay_status==1&&item.transport_status==1">
+							<div class="order_item font28 color6">已发货</div>
+						</div>
+						<div class="order_handle" v-if="mainData.pay_status==1&&item.transport_status==2">
+							<div class="order_item font28 color6">已完结</div>
+						</div>
+						<div class="order_handle" v-if="mainData.pay_status==1&&item.deliver_type==2">
+							<div class="order_item font28 color6" style="width:1.5rem">已移交总部</div>
+						</div> -->
+
+						</div>
+						<div class="handle">
+							<div class="handle_order">
+								<div class="handle_orders delete_order" v-if="mainData.pay_status==1&&item.transport_status==0&&item.deliver_type==1"
+								 @click="orderItemUpdateTwo" :data-index="index">移交总部</div>
+
+
+								<div class="handle_orders delete_order" @click="orderItemUpdate" :data-index="index" v-if="mainData.pay_status==1&&item.transport_status==0&&item.deliver_type==1">自己发货</div>
+
+								<div class="handle_orders delete_order" v-if="mainData.pay_status==1&&item.transport_status==1">已发货</div>
+
+								<div class="handle_orders delete_order" v-if="mainData.pay_status==1&&item.transport_status==2">已完结</div>
+
+
+								<div class="handle_orders delete_order" v-if="mainData.pay_status==1&&item.deliver_type==2">已移交总部</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="order_handle w690">
+					<div class="order_item font28 color_r" style="width:2.4rem">订单总价:{{mainData.price}}</div>
+				</div>
+				<div v-if="mainData.pay_status==0">
+					<div class="submit_info" style="background:#ffbc2c;border-radius:0.4rem;margin-top:0.6rem;width:60%;margin-left:20%"
+					 @click="orderUpdate">
+						确认此订单已付款？
+					</div>
+				</div>
+				<div class="confirm color1" v-if="is_confirm">
+					<div class="confirm_cont">
+						<div class="confirm_tlt font28 color1">确认成功</div>
+						<img src="images/close_a.png" @click="close" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						currentId: 0,
+						mainData: [],
+						paginate: {
+							count: 0,
+							currentPage: 1,
+							pagesize: 10,
+							is_page: true,
+
+						},
+						userData: [],
+						searchItem: {},
+						is_confirm: false
+					}
+
+				},
+				mounted() {
+
+				},
+				computed: {
+
+				},
+				created: function() {
+					var callback = (res) => {
+
+						this.userGet();
+
+					};
+					window.base.getMerchantToken(callback);
+				},
+
+				methods: {
+
+					userGet() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('merchant_token'),
+							thirdapp_id: 2,
+							searchItem: {
+								user_no: localStorage.getItem('merchant_no')
+							}
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.userData = res.info.data[0];
+								self.getMainData()
+							} else {
+								alert('数据错误')
+							}
+							console.log(self.userData);
+							console.log('self.userData.level', self.userData.level)
+						}
+						window.base.userInfoGet(postData, callback);
+					},
+
+					getMainData() {
+						const self = this;
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+						postData.searchItem = {
+							agent_no: localStorage.getItem('merchant_no'),
+							user_type: 1,
+							id: window.base.GetRequest().id
+						};
+						postData.order = {
+							create_time: 'desc'
+						};
+						postData.getAfter = {
+							user: {
+								tableName: 'UserInfo',
+								middleKey: 'user_no',
+								key: 'user_no',
+								searchItem: {
+									status: 1
+								},
+								condition: '=',
+								info: ['name', 'level']
+							}
+						};
+
+						const callback = (res) => {
+							if (res.solely_code == 100000) {
+								if (res.info.data.length > 0) {
+									self.mainData = res.info.data[0];
+									self.balance = 0;
+									for (var i = 0; i < self.mainData.products.length; i++) {
+										if (self.userData.level == 1) {
+											self.balance += parseFloat(self.mainData.products[i].count) * parseFloat(self.mainData.products[i].snap_product
+												.price_one)
+										} else if (self.userData.level == 2) {
+											self.balance += parseFloat(self.mainData.products[i].count) * parseFloat(self.mainData.products[i].snap_product
+												.price_two)
+										} else if (self.userData.level == 3) {
+											self.balance += parseFloat(self.mainData.products[i].count) * parseFloat(self.mainData.products[i].snap_product
+												.price_three)
+										} else if (self.userData.level == 4) {
+											self.balance += parseFloat(self.mainData.products[i].count) * parseFloat(self.mainData.products[i].snap_product
+												.price_four)
+										} else if (self.userData.level == 5) {
+											self.balance += parseFloat(self.mainData.products[i].count) * parseFloat(self.mainData.products[i].snap_product
+												.price_five)
+										}
+										/* console.log(parseFloat(self.mainData.products[i].count));
+										console.log(self.mainData.products[i].snap_product.price_three); */
+										console.log(parseFloat(self.mainData.products[i].count) * parseFloat(self.mainData.products[i].snap_product
+											.price_three));
+									};
+									self.balance = self.mainData.price - self.balance;
+									console.log('self.balance', self.balance)
+								} else {
+									alert('数据传递错误');
+								};
+							} else {
+								alert('网络故障')
+							};
+							console.log('getMainData', self.mainData)
+						};
+						window.base.orderGet(postData, callback);
+					},
+
+					orderUpdate(e) {
+						const self = this;
+
+						var type = window.base.getDataSet(e, 'type').type;
+						console.log('index', type)
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+						postData.data = {
+							pay_status: 1
+						}
+						postData.searchItem = {
+							id: window.base.GetRequest().id,
+							user_type: 1
+						};
+						postData.saveAfter = [{
+							tableName: 'FlowLog',
+							FuncName: 'add',
+							data: {
+								user_no: localStorage.getItem('merchant_no'),
+								count: self.balance,
+								thirdapp_id: 2,
+								trade_info: '下级订单差价',
+								type: 2,
+							}
+						}];
+						const callback = res => {
+							if (res.solely_code == 100000) {
+								alert('操作成功')
+							}
+							self.getMainData()
+						};
+						window.base.orderUpdate(postData, callback);
+					},
+
+					orderItemUpdate(e) {
+						const self = this;
+						var index = window.base.getDataSet(e, 'type').index;
+						console.log('index', index)
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+						postData.data = {
+							deliver_type: 1
+						};
+						postData.searchItem = {
+							id: self.mainData.products[index].id
+						};
+						const callback = res => {
+							if (res.solely_code == 100000) {
+								
+								self.orderItemDeliver(index)
+							}
+
+						};
+						window.base.orderItemUpdate(postData, callback);
+					},
+
+					orderItemUpdateTwo(e) {
+						const self = this;
+						var index = window.base.getDataSet(e, 'type').index;
+						console.log('index', index)
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+						postData.data = {
+							deliver_type: 2
+						};
+						postData.searchItem = {
+							id: self.mainData.products[index].id
+						};
+						const callback = res => {
+							if (res.solely_code == 100000) {
+								alert('操作成功');
+								self.getMainData()
+							}
+
+						};
+						window.base.orderItemUpdate(postData, callback);
+					},
+
+					orderItemDeliver(index) {
+						const self = this;
+
+						console.log('index', index)
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+
+						postData.searchItem = {
+							id: self.mainData.products[index].id
+						};
+						const callback = res => {
+							if (res.solely_code == 100000) {
+								self.getMainData()
+							}else{
+								alert('库存不足')
+							}
+
+						};
+
+						window.base.orderItemDeliver(postData, callback);
+					},
+
+
+
+
+					intoPath(url) {
+						var into_url = url;
+						window.location.href = into_url + '.html'
+					},
+
+					send() {
+						const self = this;
+						self.is_confirm = !self.is_confirm;
+					},
+
+					close() {
+						const self = this;
+						self.is_confirm = false;
+					},
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

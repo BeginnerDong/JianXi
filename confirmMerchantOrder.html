@@ -140,7 +140,7 @@
 			<div class="w750">
 				<div class="manage w690 flex">
 					<!-- 没有选择地址 -->
-					<div class="address_blank font30 color6" v-if="addressData&&addressData.length==0" @click="intoAddress('userAddress','user')">添加地址</div>
+					<div class="address_blank font30 color6" v-if="addressData&&addressData.length==0" @click="intoAddress('userAddress',type)">添加地址</div>
 					<div class="manage_cont" @click="intoAddress('userAddress',type)" v-else>
 						<div class="user_address flex color3">
 							<div class="address_left flex font30">
@@ -165,13 +165,48 @@
 						</div>
 						<div class="product_right">
 							<div class="product_detail">
-								<div class="font32 color3 product_top">{{item.title}}</div>
-								<div class="font24 color9">{{item.description}}</div>
-								<div class="font30 color6 product_price flex">
-									积分：
-									{{item.price}}
+								<div class="font32 color3 product_top avoidOverflow">{{item.title}}</div>
+								<div class="font24 color9 avoidOverflow">{{item.description}}</div>
+								<div class="font30 color6 product_price flex" v-if="userData.level==1">
+									<span style="width:80%">
+									￥{{item.price_one}}
+									</span>
+									<span class="color_r" style="text-align: right;">
+									x{{item.count}}
+									</span>
 								</div>
-								
+								<div class="font30 color6 product_price flex" v-if="userData.level==2">
+									<span style="width:80%">
+									￥{{item.price_two}}
+									</span>
+									<span class="color_r" style="text-align: right;">
+									x{{item.count}}
+									</span>
+								</div>
+								<div class="font30 color6 product_price flex" v-if="userData.level==3">
+									<span style="width:80%">
+									￥{{item.price_three}}
+									</span>
+									<span class="color_r" style="text-align: right;">
+									x{{item.count}}
+									</span>
+								</div>
+								<div class="font30 color6 product_price flex" v-if="userData.level==4">
+									<span style="width:80%">
+									￥{{item.price_four}}
+									</span>
+									<span class="color_r" style="text-align: right;">
+									x{{item.count}}
+									</span>
+								</div>
+								<div class="font30 color6 product_price flex" v-if="userData.level==5">
+									<span style="width:80%">
+									￥{{item.price_five}}
+									</span>
+									<span class="color_r" style="text-align: right;">
+									x{{item.count}}
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -187,8 +222,8 @@
 					</div>
 				</div> -->
 				<div class="confirm_btn flexRowBetween font30">
-					<div class="confirm_left">合计:<span class="color_r"> 积分：{{price}}</span></div>
-					<div class="confirm_right color1" @click="addOrder()">提交订单</div>
+					<div class="confirm_left">合计:<span class="color_r"> ￥{{totalPrice}}</span></div>
+					<div class="confirm_right color1" @click="pay">提交订单</div>
 				</div>
 
 				<!--end toast-->
@@ -209,7 +244,7 @@
 				el: '#app',
 				data: function() {
 					return {
-						mainData: [],
+						
 						paginate: {
 							count: 0,
 							currentPage: 1,
@@ -220,7 +255,7 @@
 						order_array: [],
 						parentMainData: [],
 						addressData: [],
-						price: 0,
+						totalPrice: 0,
 						isLoad: false
 
 					}
@@ -237,7 +272,7 @@
 					const self = this;
 					self.isLoad = true;
 
-
+					
 					self.searchItem = {};
 					if (localStorage.getItem('address_id')) {
 						self.searchItem.id = localStorage.getItem('address_id');
@@ -245,23 +280,12 @@
 						self.searchItem.isdefault = 1;
 					};
 					
-					console.log(' self.order_array', self.order_array)
+				
 
 					self.getAddressData();
-					self.userGet();
+					
 					self.getMainData();
-
-				/* 	if (!self.type) {
-						self.getMerMainData()
-					}else{
-						if (window.base.GetRequest().order_id) {
-							self.order_id = window.base.GetRequest().order_id;
-							self.order_array = window.base.GetRequest().order_id.split(',');
-						} else {
-							alert('数据传递有误');
-						};
-						
-					} */
+					
 
 
 				},
@@ -275,39 +299,29 @@
 					getMainData() {
 						const self = this;
 						self.mainData = {
-							products:[
-								
-							]
+							products:[]
 						};
 						self.mainData.products = window.base.getStorageArray('payPro');
-						console.log('self.mainData.products',self.mainData.products )
 						for (var i = 0; i < self.mainData.products.length; i++) {
 							window.base.delStorageArray('payPro',self.mainData.products[i],'id');
 						}
-						self.countPrice();
+						
+						console.log('onShow', self.mainData);
+						self.userGet();
+						
 						self.isLoad = false;
 					},
 
-					addOrder(e) {
+					pay(e) {
 						const self = this;
-						
 						const productData = [
-								
+		
 						];
-						console.log('self.price',self.price)
-						console.log('self.userData.score',self.userData.score)
-						if(self.price>self.userData.score){
-							alert('积分不足');
-							return
-						}
-						if(self.orderId){
-							self.pay(self.orderId);
-							return
-						};
 						if (self.addressData.length == 0) {
 							alert('请添加收货地址')
 							return
 						};
+						self.isLoad = true;
 						for (var i = 0; i < self.mainData.products.length; i++){
 							productData.push({
 								id: self.mainData.products[i].id,
@@ -316,19 +330,23 @@
 						};
 						var orderList = [{
 							product: productData,
-
 						}];
 						const postData = {
-							token: localStorage.getItem('user_token'),
+							token: localStorage.getItem('merchant_token'),
 							orderList: orderList,
 							type: 1,
+							data: {
+								agent_no: localStorage.getItem('merchant_agent_no'),	
+							},
 							snap_address:self.addressData[0]
 						};
 						const callback = (res) => {
 							if (res && res.solely_code == 100000) {
-								self.orderId = res.info.id;
-								console.log('self.orderId',self.orderId)
-								self.pay(self.orderId)
+								self.isLoad = false;
+								alert('提交成功');
+								
+								
+								window.location.href = 'wxBusinessOrder.html'
 							} else {
 								alert(res.msg);
 							};
@@ -341,10 +359,10 @@
 					userGet() {
 						const self = this;
 						const postData = {
-							token: localStorage.getItem('user_token'),
+							token: localStorage.getItem('merchant_token'),
 							thirdapp_id: 2,
 							searchItem: {
-								user_no: localStorage.getItem('user_no')
+								user_no: localStorage.getItem('merchant_no')
 							}
 						};
 						const callback = (res) => {
@@ -353,6 +371,7 @@
 							} else {
 								alert('数据错误')
 							}
+							self.countTotalPrice();
 							console.log(self.userData)
 						}
 						window.base.userInfoGet(postData, callback);
@@ -361,9 +380,11 @@
 					getAddressData() {
 						const self = this;
 						const postData = {};
-					
-						postData.token = localStorage.getItem('user_token');
-						
+						if (self.type == 'user') {
+							postData.token = localStorage.getItem('user_token');
+						} else {
+							postData.token = localStorage.getItem('merchant_token');
+						};
 						postData.searchItem = window.base.cloneForm(self.searchItem);
 						const callback = (res) => {
 							if (res.info.data.length > 0) {
@@ -374,122 +395,34 @@
 						window.base.addressGet(postData, callback);
 					},
 
-/* 					getMainData(isNew) {
-
-						const self = this;
-						if (isNew) {
-							paginate = {
-								count: 0,
-								currentPage: 1,
-								pagesize: 10,
-								is_page: true,
-							}
-						};
-						const postData = {};
-						console.log(' self.order_array', self.order_array)
-						postData.paginate = window.base.cloneForm(self.paginate);
-						if (self.type == 'user') {
-							postData.token = localStorage.getItem('user_token');
-						} else {
-							postData.token = localStorage.getItem('merchant_token');
-						};
-						postData.searchItem = {
-							id: ['in', self.order_array]
-						};
-
-						const callback = (res) => {
-							if (res.info.data.length > 0) {
-
-
-								self.mainData = res.info.data[0];
-							} else {
-								self.mainData = res.info.data;
-							};
-							self.isLoad = false;
-
-							self.countPrice()
-						};
-
-						window.base.orderGet(postData, callback);
-					}, */
-
-/* 					orderUpdate(e) {
-						const self = this;
-						const postData = {};
-						if (self.type == 'user') {
-							postData.token = localStorage.getItem('user_token');
-						} else {
-							postData.token = localStorage.getItem('merchant_token');
-						};
-						postData.data = {
-							snap_address: self.addressData[0],
-						}
-						postData.searchItem = {};
-						postData.searchItem.id = self.mainData.id;
-
-						const callback = res => {
-							console.log(666)
-						};
-						window.base.orderUpdate(postData, callback);
-					}, */
-
-					pay(order_id) {
-
-						const self = this;
-						if (self.addressData.length == 0) {
-							alert('请添加收货地址')
-							return
-						};
-						const postData = self.pay;
-			
-						postData.token = localStorage.getItem('user_token');
-						
-						postData.searchItem = {
-							id: order_id
-						};
-						const callback = (res) => {
-							console.log(res)
-							if (res.solely_code == 100000) {
-								alert('支付成功');
-								window.location.href = './userOrder.html'
-								if (res.info) {
-									const payCallback = (payData) => {
-										if (payData == 1) {
-											const cc_callback = () => {
-												alert('支付成功');
-												window.location.href = './userOrder.html'
-											};
-
-										};
-									};
-									window.base.realPay(res.info, payCallback);
-								} else {
-									alert('支付成功');
-									window.location.href = './userOrder.html'
-								};
-							} else {
-								alert(res.msg, 'none');
-							};
-						};
-						window.base.pay(postData, callback);
-					},
-
-					countPrice() {
-
-						const self = this;
 					
-						for (var i = 0; i < self.mainData.products.length; i++) {
-							self.price += parseFloat(self.mainData.products[i].count) * parseFloat(self.mainData.products[i]
-								.price)
-						}
-						/* self.price = window.base.addItemInArray(self.mainData.products, 'price'); */
-						console.log('self.price', self.price)
 
-						self.pay.score = self.price
-						
-
-					},
 				
+
+					countTotalPrice() {
+						const self = this;
+						
+						
+						for (var i = 0; i < self.mainData.products.length; i++) {
+							
+								if(self.userData.level==1){
+									self.totalPrice += parseFloat(self.mainData.products[i].price_one) * parseFloat(self.mainData.products[i].count)
+								}else if(self.userData.level==2){
+									self.totalPrice += parseFloat(self.mainData.products[i].price_two) * parseFloat(self.mainData.products[i].count)
+								}else if(self.userData.level==3){
+									self.totalPrice += parseFloat(self.mainData.products[i].price_three) * parseFloat(self.mainData.products[i].count)
+								}else if(self.userData.level==4){
+									self.totalPrice += parseFloat(self.mainData.products[i].price_four) * parseFloat(self.mainData.products[i].count)
+								}else if(self.userData.level==5){
+									self.totalPrice += parseFloat(self.mainData.products[i].price_five) * parseFloat(self.mainData.products[i].count)
+								}
+								
+						
+						};
+						console.log(parseFloat(self.mainData.products[0].price_three) * parseFloat(self.mainData.products[0].count))
+					},
+					
+
 
 					intoPath(url) {
 						var into_url = url;

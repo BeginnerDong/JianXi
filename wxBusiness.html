@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>微商</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-.infor_left{
+	<head id="header">
+		<title>微商</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.infor_left{
   width:28%;
 }
 .infor_center{
@@ -112,172 +112,278 @@
   margin-top:0.4rem;
 }
 </style>
-</head>
-<body style="background:#f2f2f2;">
+	</head>
+	<body style="background:#f2f2f2;">
 
-<div id="app">
-  <div class="w750">
-    <div class="w690 wx_infor flex bg1">
-      <div class="infor_left">
-        <img src="images/Wechatbusiness-img1@2x.png"/>
-      </div>
-      <div class="infor_center flex_v">
-        <div class="infor_list flex">
-          <img src="images/Wechatbusiness-icon@2x.png"/>
-          <p class="color2 font28">
-            姓名：赵瑞
-          </p>
-        </div>
-        <div class="infor_list flex">
-          <img src="images/Wechatbusiness-icon1@2x.png"/>
-          <p class="color2 font28">
-            级别：大区
-          </p>
-        </div>
-        <div class="infor_list flex">
-          <img src="images/Wechatbusiness-icon2@2x.png"/>
-          <p class="color2 font28">
-            手机号：49878978
-          </p>
-        </div>
-        <div class="infor_list flex">
-          <img src="images/Wechatbusiness-icon3@2x.png"/>
-          <p class="color2 font28">
-            邮箱：1212121@163.com
-          </p>
-        </div>
-      </div>
-      <div class="infor_right" style="height:100%;" @click="intoPath('wxBusinessInfor')">
-        <img src="images/pencile.png">
-      </div>
-    </div>
-    <div class="w690">
-      <div class="funds bg1">
-        <div class="funds_tlt w690 font28 color1">资金管理</div>
-        <div class="funds_cont flex">
-          <div class="funds_item" style="border-right:solid 1px #e0e0e0;">
-            <p class="font28 color2">
-              保证金
-            </p>
-            <p class="font28 color2">¥900</p>
-          </div>
-          <div class="funds_item" style="border-right:solid 1px #e0e0e0;">
-            <p class="font28 color2">
-              业绩奖励
-            </p>
-            <p class="font28 color2">¥900</p>
-          </div>
-          <div class="funds_item">
-            <p class="font28 color2">
-              余额
-            </p>
-            <p class="font28 color2">¥900</p>
-          </div>
-        </div>
-      </div>
-      <div class="wxBusinessOrder bg1" style="height:2.78rem;">
-        <div class="funds_tlt w690 flexRowBetween" @click="intoPath('wxBusinessOrder')">
-          <p class="font28 color1">我的订单</p>
-          <div class="flex">
-            <p class="font28 color1">全部订单</p>
-            <img src="images/next-page@2x.png"/>
-          </div>
-        </div>
-        <div class="business_cont flex">
-          <div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=0')">
-            <img src="images/business-icon1.png"/>
-            <p class="font28 color2">待付款</p>
-            <span class="number">1</span>
-          </div>
-          <div class="business_item"  @click="intoPath_a('wxBusinessOrder.html?id=1')">
-            <img src="images/business-icon2.png"/>
-            <p class="font28 color2">待发货</p>
-            <span class="number">1</span>
-          </div>
-          <div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=2')">
-            <img src="images/business-icon3.png"/ >
-            <p class="font28 color2">待收货</p>
-            <span class="number">1</span>
-          </div>
-          <div class="business_item"  @click="intoPath_a('wxBusinessOrder.html?id=3')">
-            <img src="images/business-icon4.png"/>
-            <p class="font28 color2">已完成</p>
-            <span class="number">1</span>
-          </div>
-          <div class="business_item"  @click="intoPath_a('wxBusinessOrder.html?id=4')">
-            <img src="images/business-icon5.png"/>
-            <p class="font28 color2">已撤销</p>
-            <span class="number">1</span>
-          </div>
-        </div>
-      </div>
-      <div class="wxBusinessOrder bg1">
-        <div class="funds_tlt w690 flexRowBetween">
-          <p class="font28 color1">店铺管理</p>
-        </div>
-        <div class="business_cont flex" style="height:2.4rem;">
-          <div class="business_item" @click="intoPath('wxBusinessNext')">
-            <img src="images/business-icon6.png"/>
-            <p class="font28 color2">下属代理</p>
-          </div>
-          <div class="business_item" @click="intoPath('wxBusinessCertificate')">
-            <img src="images/business-icon7.png"/>
-            <p class="font28 color2">授权证书</p>
-          </div>
-          <div class="business_item" @click="intoPath('wxBusinessAgent')">
-            <img src="images/business-icon3.png"/>
-            <p class="font28 color2">代理审核</p>
-          </div>
-          <div class="business_item" @click="intoPath('wxBusinessAgentOrder')">
-            <img src="images/business-icon9.png"/>
-            <p class="font28 color2">代理订单</p>
-          </div>
-          <div class="business_item" @click="intoPath('wxBusinessPerformance')">
-            <img src="images/business-icon10.png"/>
-            <p class="font28 color2">我的业绩</p>
-          </div>
-        </div>
-      </div>
-      <div class="submit_info" style="background:#ffbc2c;border-radius:0.4rem;margin-top:0.6rem;" @click="intoPath('shopping')">下单</div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="w690 wx_infor flex bg1">
+					<div class="infor_left">
+						<img :src="mainData.mainImg&&mainData.mainImg[0]?mainData.mainImg[0].url:''" />
+					</div>
+					<div class="infor_center flex_v">
+						<div class="infor_list flex">
+							<img src="images/Wechatbusiness-icon@2x.png" />
+							<p class="color2 font28">
+								姓名：{{mainData.info&&mainData.info.name?mainData.info.name:''}}
+							</p>
+						</div>
+						<div class="infor_list flex">
+							<img src="images/Wechatbusiness-icon1@2x.png" />
+							<p class="color2 font28" v-if="mainData.info&&mainData.info.level==1">
+								级别：联创
+							</p>
+							<p class="color2 font28" v-if="mainData.info&&mainData.info.level==2">
+								级别：品牌官方
+							</p>
+							<p class="color2 font28" v-if="mainData.info&&mainData.info.level==3">
+								级别：大区主管
+							</p>
+							<p class="color2 font28" v-if="mainData.info&&mainData.info.level==4">
+								级别：经销商
+							</p>
+							<p class="color2 font28" v-if="mainData.info&&mainData.info.level==5">
+								级别：VIP
+							</p>
+							
+						</div>
+						<div class="infor_list flex">
+							<img src="images/Wechatbusiness-icon2@2x.png" />
+							<p class="color2 font28">
+								手机号：{{mainData.info&&mainData.info.phone?mainData.info.phone:''}}
+							</p>
+						</div>
+						<div class="infor_list flex">
+							<img src="images/Wechatbusiness-icon3@2x.png" />
+							<p class="color2 font28">
+								邮箱：{{mainData.info&&mainData.info.email?mainData.info.email:''}}
+							</p>
+						</div>
+					</div>
+					<div class="infor_right" style="height:100%;" @click="intoPath('wxBusinessInfor')">
+						<img src="images/pencile.png">
+					</div>
+				</div>
+				<div class="w690" style="padding: 0 4% 4% 4%;">
+					<div class="funds bg1">
+						<div class="funds_tlt w690 font28 color1">资金管理</div>
+						<div class="funds_cont flex">
+							<div class="funds_item" style="border-right:solid 1px #e0e0e0;">
+								<p class="font28 color2">
+									保证金
+								</p>
+								<p class="font28 color2">¥{{mainData.info&&mainData.info.deposit?mainData.info.deposit:''}}</p>
+							</div>
+							<div class="funds_item" style="border-right:solid 1px #e0e0e0;">
+								<p class="font28 color2">
+									业绩奖励
+								</p>
+								<p class="font28 color2">¥{{mainData.info&&mainData.info.reward?mainData.info.reward:''}}</p>
+							</div>
+							<div class="funds_item">
+								<p class="font28 color2">
+									余额
+								</p>
+								<p class="font28 color2">¥{{mainData.info&&mainData.info.balance?mainData.info.balance:''}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="submit_info" style="background:#ffbc2c;border-radius:0.4rem;margin-top:0.5rem;" @click="intoPath('wxBusinessAddOrder')">下单</div>
+					<div class="wxBusinessOrder bg1" style="height:2.78rem;">
+						<div class="funds_tlt w690 flexRowBetween" @click="intoPath('wxBusinessOrder')">
+							<p class="font28 color1">我的订单</p>
+							<div class="flex">
+								<p class="font28 color1">全部订单</p>
+								<img src="images/next-page@2x.png" />
+							</div>
+						</div>
+						<div class="business_cont flex">
+							<div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=1')">
+								<img src="images/business-icon1.png" />
+								<p class="font28 color2">待付款</p>
+								<span class="number" v-if="mainData.noPayOrder&&mainData.noPayOrder.length>0">
+									{{mainData.noPayOrder.length}}
+								</span>
+							</div>
+							<div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=2')">
+								<img src="images/business-icon2.png" />
+								<p class="font28 color2">待发货</p>
+								<span class="number" v-if="mainData.noTransOrder&&mainData.noTransOrder.length>0">
+									{{mainData.noTransOrder.length}}
+								</span>
+							</div>
+							<div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=3')">
+								<img src="images/business-icon3.png" />
+								<p class="font28 color2">待收货</p>
+								<span class="number" v-if="mainData.hasTransOrder&&mainData.hasTransOrder.length>0">
+									{{mainData.hasTransOrder.length}}
+								</span>
+							</div>
+							<div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=4')">
+								<img src="images/business-icon4.png" />
+								<p class="font28 color2">已完成</p>
+								<span class="number" v-if="mainData.hasComOrder&&mainData.hasComOrder.length>0">
+									{{mainData.hasComOrder.length}}
+								</span>
+							</div>
+							<div class="business_item" @click="intoPath_a('wxBusinessOrder.html?id=5')">
+								<img src="images/business-icon5.png" />
+								<p class="font28 color2">已撤销</p>
+								<span class="number" v-if="mainData.hasDeleteOrder&&mainData.hasDeleteOrder.length>0">
+									{{mainData.hasDeleteOrder.length}}
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="wxBusinessOrder bg1">
+						<div class="funds_tlt w690 flexRowBetween">
+							<p class="font28 color1">店铺管理</p>
+						</div>
+						<div class="business_cont flex" style="height:2.4rem;">
+							<div class="business_item" @click="intoPath('wxBusinessNext')">
+								<img src="images/business-icon6.png" />
+								<p class="font28 color2">下属代理</p>
+							</div>
+							<div class="business_item" @click="intoPath('wxBusinessCertificate')">
+								<img src="images/business-icon7.png" />
+								<p class="font28 color2">授权证书</p>
+							</div>
+							<div class="business_item" @click="intoPath('wxBusinessAgent')">
+								<img src="images/business-icon3.png" />
+								<p class="font28 color2">代理审核</p>
+							</div>
+							<div class="business_item" @click="intoPath('wxBusinessAgentOrder')">
+								<img src="images/business-icon9.png" />
+								<p class="font28 color2">代理订单</p>
+							</div>
+							<div class="business_item" @click="intoPath('wxBusinessPerformance')">
+								<img src="images/business-icon10.png" />
+								<p class="font28 color2">我的业绩</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData: []
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+				},
+				mounted() {
 
-    methods:{
-      intoPath(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url+'.html'
-      },
-      intoPath_a(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url
-      }
+				},
+				computed: {
 
-    } 
+				},
+				created: function() {
+					var callback = (res) => {
 
-});           
-</script>
-</body>
+						this.userGet()
+
+					};
+					window.base.getMerchantToken(callback);
+				},
+
+				methods: {
+
+					userGet() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('merchant_token'),
+							thirdapp_id: 2
+						};
+						postData.getAfter = {
+							noPayOrder:{
+								tableName:'Order',
+								middleKey:'user_no',
+								key:'user_no',
+								searchItem:{
+									status:1,
+									pay_status:0
+								},
+								condition:'='
+							},
+						
+							noTransOrder:{
+								tableName:'Order',
+								middleKey:'user_no',
+								key:'user_no',
+								searchItem:{
+									status:1,
+									pay_status:1,
+									transport_status:0
+								},
+								condition:'='
+							},
+							hasTransOrder:{
+								tableName:'Order',
+								middleKey:'user_no',
+								key:'user_no',
+								searchItem:{
+									status:1,
+									pay_status:1,
+									transport_status:1
+								},
+								condition:'='
+							},
+							hasComOrder:{
+								tableName:'Order',
+								middleKey:'user_no',
+								key:'user_no',
+								searchItem:{
+									status:1,
+									pay_status:1,
+									transport_status:2
+								},
+								condition:'='
+							},
+							hasdeleteOrder:{
+								tableName:'Order',
+								middleKey:'user_no',
+								key:'user_no',
+								searchItem:{
+									status:-1,
+									
+								},
+								condition:'='
+							},
+							
+							
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData = res.info.data[0]
+							} else {
+								alert('数据错误')
+							}
+							console.log(self.mainData)
+						}
+						window.base.userGet(postData, callback);
+					},
+
+					intoPath(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html'
+					},
+					intoPath_a(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url
+					}
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

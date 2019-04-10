@@ -1,72 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>授权</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-</head>
-<body>
-<style>
-.submit_info{
+	<head id="header">
+		<title>授权</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/weui.min.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		
+	</head>
+	<body>
+		<style>
+			.submit_info{
     margin:0.5rem auto;
     width:80%;
 }
 </style>
-<div id="app">
-    <div class="w750">
-        <div class="w690">
-          <div class="bg1 shadow1" style="margin-top:0.4rem;">
-            <p class="auth_tlt font28 color2">标题标题标题标题标题标题标题标题</p>
-            <div class="auth_cont font28 color6 w710">1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；1.内容内容内容内容内容内容内容内容内容内容内内容 内容内容内容；</div>
-          </div>
-          <button class="submit_info" @click="intoPath('authorize_infor')">同意授权</button>
-        </div>
-        
-    </div>
-     
-</div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="w690">
+					<div class="bg1 shadow1" style="margin-top:0.4rem;">
+						<p class="auth_tlt font28 color2">{{mainData.title}}</p>
+						<div class="auth_cont font28 color6 w710">
+							<div v-html=" mainData.content"></div>
+						</div>
+					</div>
+					<button class="submit_info" @click="type&&type=='already'?intoPath('authorize_status'):intoPath('authorize_infor')">同意授权</button>
+				</div>
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+			</div>
+			<div v-if="isLoad">
+				<div class="weui-mask_transparent"></div>
+				<div class="weui-toast">
+					<i class="weui-loading weui-icon_toast"></i>
+					<p class="weui-toast__content">数据加载中...</p>
+				</div>
+			</div>
+		</div>
+		
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData:[],
+						type:'',
+						isLoad: false,
+					
+					}
 
-    methods:{
-        intoPath(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url+'.html'
-      },
+				},
+				mounted() {
 
-    } 
+				},
+				computed: {
 
-});           
-</script>
-</body>
+				},
+				created: function() {
+					
+					
+					this.isLoad = true;
+					var callback = (res) => {
+						this.getMainData();
+						this.userGet();
+					};
+					window.base.getUserToken(callback);
+							
+				},
+							
+				methods: {
+							
+					userGet() {
+						const self = this;
+						const postData = {};
+						postData.token = localStorage.getItem('user_token');
+						postData.searchItem = {
+							passage1:localStorage.getItem('user_no'),
+							user_type:1
+						}
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								
+								self.type='already';
+								
+							}
+						};
+						window.base.userInfoGet(postData, callback);
+					},
+
+					getMainData() {
+						const self = this;
+						const postData = {};
+						postData.searchItem = {
+							thirdapp_id: 2
+						};
+						postData.getBefore = {
+							caseData: {
+								tableName: 'Label',
+								searchItem: {
+									title: ['=', ['授权']],
+								},
+								middleKey: 'menu_id',
+								key: 'id',
+								condition: 'in',
+							},
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData = res.info.data[0]
+							} else {
+								alert('数据错误')
+							};
+							self.isLoad=false,
+							self.isLoadMsg=''
+							console.log('self.mainData', self.mainData)
+						};
+						window.base.articleGet(postData, callback);
+					},
+
+					intoPath(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						
+						window.location.href = into_url + '.html'
+					},
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>联系我们</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-  .contact{
+	<head id="header">
+		<title>授权证书</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.contact{
     text-align: center;
     width:100%;
     position:relative;
@@ -82,19 +82,35 @@
   width:100%;
   left:0;
   position:absolute;
-  top:27%;
+  top:28%;
 }
 .input_wx{
   width:100%;
   left:0;
   position:absolute;
-  top:37%;
+  top:38%;
+ 
 }
 .input_data{
   width:80%;
+  left: -3px;
+  position:absolute;
+  top:75%;
+  font-size:12px
+}
+.input_level{
+  width:100%;
   left:0;
   position:absolute;
-  top:73%;
+  top:47%;
+  font-size:12px
+}
+.input_no{
+  width:80%;
+  left:3%;
+  position:absolute;
+  top:72%;
+   font-size:12px
 }
 .input_data input{
   text-align:left;
@@ -110,70 +126,131 @@ input{
 }
 
 </style>
-</head>
-<body>
+	</head>
+	<body>
 
-<div id="app">
-  <div class="w750" style="height:100vh">
-     <div class="contact">   
-      <img src="images/certificate-img.png"/>
-      <div class="input_name"><input placeholder="姓名" value="" /></div>
-      <div class="input_wx"><input placeholder="322323" value="" /></div>
-      <div class="input_data"><input placeholder="2018-9-9" value="" /></div>
-     </div>
-     <button class="submit_info" @click="send">续期</button>
-     <div class="confirm color1" v-if="is_confirm">
-      <div class="confirm_cont">
-        <div class="confirm_tlt">确认成功</div>
-        <img src="images/close_a.png" @click="close"/>
-        <div class="flexCenter">
-          <div class="confirm_btn color2 font28" @click="confirm_y">是</div>
-          <div class="confirm_btn color2 font28"  @click="confirm_n">否</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-          is_confirm:false,
-        }   
+		<div id="app">
+			<div class="w750" style="height:100vh">
+				<div class="contact">
+					<img src="images/certificate-img.png" />
+					<div class="input_name">{{mainData.info&&mainData.info.name?mainData.info.name:''}}</div>
+					<div class="input_wx">{{mainData.info&&mainData.info.wechat?mainData.info.wechat:''}}</div>
+				
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+						<div class="input_level" v-if="mainData.info&&mainData.info.level==1">联创</div>
+						<div class="input_level" v-if="mainData.info&&mainData.info.level==2">品牌官方</div>
+						<div class="input_level" v-if="mainData.info&&mainData.info.level==3">大区主管</div>
+						<div class="input_level" v-if="mainData.info&&mainData.info.level==4">经销商</div>
+						<div class="input_level" v-if="mainData.info&&mainData.info.level==5">VIP</div>
+				
+					<div class="input_no">{{mainData.user_no}}</div>
+					<div class="input_data">{{end_time}}</div>
+				</div>
+				<button class="submit_info" @click="send">续期</button>
+				<div class="confirm color1" v-if="is_confirm">
+					<div class="confirm_cont">
+						<div class="confirm_tlt">续期一年？</div>
+						<img src="images/close_a.png" @click="close" />
+						<div class="flexCenter">
+							<div class="confirm_btn color2 font28" @click="userInfoUpdate">是</div>
+							<div class="confirm_btn color2 font28" @click="confirm_n">否</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						is_confirm: false,
+						mainData:[],
+						end_time:''
+					}
 
-    methods:{
-      send(){
-        const self  = this;
-        self.is_confirm = !self.is_confirm;
-      }, 
-      close(){
-        const self  = this;
-        self.is_confirm = false;
-      },
-      confirm_y(){
-        const self  = this;
-        self.is_confirm = false;
-      },
-      confirm_n(){
-        const self  = this;
-        self.is_confirm = false;
-      },
-    } 
+				},
+				mounted() {
 
-});           
-</script>
-</body>
+				},
+				computed: {
+
+				},
+				created: function() {
+					var callback = (res) => {
+
+						this.userGet()
+
+					};
+					window.base.getMerchantToken(callback);
+				},
+
+				methods: {
+
+					userGet() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('merchant_token'),
+							thirdapp_id: 2
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData = res.info.data[0],
+								console.log(parseInt(self.mainData.info.end_time))
+								self.end_time = window.base.timestampToTime(self.mainData.info.end_time)
+							} else {
+								alert('数据错误')
+							}
+							
+							console.log(parseInt(self.mainData.info.end_time))
+						}
+						window.base.userGet(postData, callback);
+					},
+
+					userInfoUpdate() {
+						const self = this;
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+						postData.data = {
+								end_time:parseInt(self.mainData.info.end_time)+31536000
+						};
+						
+						const callback = (data) => {
+							self.is_confirm = false;
+							if (data.solely_code == 100000) {
+								alert('续期成功')
+
+							} else {
+								alert('网络故障')
+							};
+							self.userGet()
+						};
+						window.base.userInfoUpdate(postData, callback);
+					},
+
+					send() {
+						const self = this;
+						self.is_confirm = !self.is_confirm;
+					},
+
+					close() {
+						const self = this;
+						self.is_confirm = false;
+					},
+
+					confirm_y() {
+						const self = this;
+						self.is_confirm = false;
+					},
+
+					confirm_n() {
+						const self = this;
+						self.is_confirm = false;
+					},
+				}
+
+			});
+		</script>
+	</body>
 </html>

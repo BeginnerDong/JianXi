@@ -1,87 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>我的收藏</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-  .recommend_left{
+	<head id="header">
+		<title>我的收藏</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.recommend_left{
     margin-top:0.3rem;
     margin-bottom:0;
   }
 </style>
-</head>
-<body>
+	</head>
+	<body>
 
-<div id="app">
-    <div class="w750">
-        <div class="w690 index_product flexRowBetween">
-          <a class="recommend_left" @click="intoPath('detail')">
-              <img src="images/img4@2x.png"/>
-              <div class="product_name font28 color2">名称名称名称名称</div>
-              <div class="product_pro font24 flex">
-                  <p class="font24 color_r">积分:56</p>
-                  <p class="font20 color9">1212人下单</p>
-              </div>
-          </a>
-          <a class="recommend_left" @click="intoPath('detail')">
-               <img src="images/img4@2x.png"/>
-              <div class="product_name font28 color2">名称名称名称名称</div>
-              <div class="product_pro font24 flex">
-                  <p class="font24 color_r">积分:56</p>
-                  <p class="font20 color9">1212人下单</p>
-              </div>
-          </a>
-          <a class="recommend_left" @click="intoPath('detail')">
-               <img src="images/img4@2x.png"/>
-              <div class="product_name font28 color2">名称名称名称名称</div>
-              <div class="product_pro font24 flex">
-                  <p class="font24 color_r">积分:56</p>
-                  <p class="font20 color9">1212人下单</p>
-              </div>
-          </a>
-        </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="w690 index_product flexRowBetween">
+					<a class="recommend_left" v-for="item in mainData" @click="intoPath('detail',item.id)">
+						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" />
+						<div class="product_name font28 color2">{{item.title}}</div>
+						<div class="product_pro font24 flex">
+							<p class="font24 color_r">积分:{{item.price}}</p>
+							<p class="font20 color9">{{item.sale_count}}人下单</p>
+						</div>
+					</a>
+					
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData:[]
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+				},
+				mounted() {
 
-    methods:{
-      intoPath(url){
-        var into_url = url;
-        window.location.href=into_url+'.html'
-      },
+				},
+				computed: {
 
-    } 
+				},
+				created: function() {
+					this.getMainData()
+				},
 
-});           
-</script>
-</body>
+				methods: {
+					
+					getMainData() {
+						const self = this;
+						self.mainData = window.base.getStorageArray('collectData');
+						console.log('onShow', self.mainData);
+			
+					},
+
+					intoPath(url,id) {
+						console.log(url);
+						window.location.href = url + '.html'+'?id='+id
+					},
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

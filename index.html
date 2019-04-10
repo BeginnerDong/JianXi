@@ -1,114 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>授权申请</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-</head>
-<body>
+	<head id="header">
+		<title>简希</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+	</head>
+	<body>
 
-<div id="app">
-    <div class="w750">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li  data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li  data-target="#carousel-example-generic" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div  class="item active">
-                  <img src="images/img@2x.png" class="img-responsive banner_img">
-                </div>
-                <div  class="item">
-                  <img src="images/img@2x.png" class="img-responsive banner_img">
-                </div>
-            </div> 
-            <a class="left carousel-control flex" href="#carousel-example-generic" role="button" data-slide="prev">
-            </a>
-            <a class="right carousel-control flex" href="#carousel-example-generic" role="button" data-slide="next">
-              
-            </a>
-        </div>
-        <div class="title flexCenter">
-            <img src="images/icon@2x.png"/>
-            <span class="font30 color2">积分商城</span>
-        </div>
-        <div class="w690 index_product flexRowBetween">
-          <a class="recommend_left" @click="intoPath('detail')">
-              <img src="images/img4@2x.png"/>
-              <div class="product_name font28 color2">名称名称名称名称</div>
-              <div class="product_pro font24 flex">
-                  <p class="font24 color_r">积分:56</p>
-                  <p class="font20 color9">1212人下单</p>
-              </div>
-          </a>
-          <a class="recommend_left" @click="intoPath('detail')">
-              <img src="images/img4@2x.png"/>
-              <div class="product_name font28 color2">名称名称名称名称</div>
-              <div class="product_pro font24 flex">
-                  <p class="font24 color_r">积分:56</p>
-                  <p class="font20 color9">1212人下单</p>
-              </div>
-          </a>
-          <a class="recommend_left" @click="intoPath('detail')">
-              <img src="images/img4@2x.png"/>
-              <div class="product_name font28 color2">名称名称名称名称</div>
-              <div class="product_pro font24 flex">
-                  <p class="font24 color_r">积分:56</p>
-                  <p class="font20 color9">1212人下单</p>
-              </div>
-          </a>
-        </div>
-    </div>
-    <a class="shopping" @click="intoPath('shopping')">
-        <img src="images/icon1@2x.png"/>
-    </a>
-</div>
+		<div id="app">
+			<div class="w750">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="height:3.3rem">
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" v-for="(item,index) in sliderData" :data-slide-to="index" :class="index==0?'active':''"></li>
+					</ol>
+					<div class="carousel-inner" role="listbox">
+						<div class="item" v-for="(item,index) in sliderData" :class="index==0?'active':''" :data-index="index">
+							<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" class="img-responsive banner_img" style="height:3.3rem">
+						</div>
+					</div>
+					
+				</div>
+				<div class="title flexCenter">
+					<img src="images/icon@2x.png" />
+					<span class="font30 color2">积分商品</span>
+				</div>
+				<div class="w690 index_product flexRowBetween">
+					<a class="recommend_left"  v-for="item in mainData">
+						<img :src="item.mainImg&&item.mainImg[0]?item.mainImg[0].url:''" @click="intoPath('detail',item.id)"/>
+						<div class="product_name font28 color2 avoidOverflow" style="height:0.6rem;line-height:0.6rem;padding-left:3%;">{{item.title}}</div>
+						<div class="product_pro font24 flex">
+							<p class="font24 color_r">积分:{{item.price}}</p>
+							<p class="font20 color9">{{item.sale_count}}人下单</p>
+						</div>
+					</a>
+				</div>
+			</div>
+			<a class="shopping" @click="intoPath('shopping')">
+				<img src="images/icon1@2x.png" />
+			</a>
+		</div>
 
-<div class="solely" style="font-size:0.20rem;color:#666;text-align:center;height:0.8rem;line-height:0.8rem;">
-    技术支持:西安纯粹科技
-</div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        }   
+		<div class="solely" style="font-size:0.20rem;color:#666;text-align:center;height:0.8rem;line-height:0.8rem;">
+			技术支持:西安纯粹科技
+		</div>
+		<a class="solely" href="http://www.miitbeian.gov.cn" style="font-size:0.20rem;width:100%;color:#666;text-align:center;height:0.8rem;line-height:0.8rem;">
+			陕ICP备19002700号
+		</a>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						sliderData: [],
+						buttonClick: false,
+						isLoadAll: false,
+						mainData: []
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+				},
+				
+				mounted() {
+					window.addEventListener('scroll', this.handleScroll)
+				},
+				
+				computed: {
+					// 计算属性的 getter
+					stringifyOrder: function() {
+						return JSON.stringify(this.order).replace(/\"/g, "");
+					}
+				},
+				
+				created: function() {
+					this.getMainData();
+					this.getSliderData()
+				},
 
-    methods:{
-      intoPath(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url+'.html'
-      },
 
-    } 
 
-});           
-</script>
-</body>
+				methods: {
+
+					handleScroll() {
+						var wScrollY = window.scrollY; // 当前滚动条位置  
+						var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）  
+						var bScrollH = document.body.scrollHeight; // 滚动条总高度      
+						if ((wScrollY + wInnerH >= bScrollH) && !this.isLoadAll && !this.buttonClick) {
+							this.buttonClick = true;
+							this.paginate.currentPage++;
+							this.getMainData();
+						};
+					},
+
+					getMainData(isNew) {
+						const self = this;
+						if (isNew) {
+							self.mainData = [];
+							self.paginate = {
+								count: 0,
+								currentPage: 1,
+								pagesize: 6,
+								is_page: true,
+							}
+						};
+						const postData = {};
+						postData.searchItem = {
+							thirdapp_id: 2
+						};
+						postData.getBefore = {
+							caseData: {
+								tableName: 'Label',
+								searchItem: {
+									title: ['=', ['积分商品']],
+								},
+								middleKey: 'category_id',
+								key: 'id',
+								condition: 'in',
+							},
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData.push.apply(self.mainData, res.info.data)
+							} else {
+								self.isLoadAll = true;
+								alert('没有更多了');
+							};
+							console.log('self.mainData', self.mainData)
+						};
+						window.base.productGet(postData, callback);
+					},
+
+					getSliderData() {
+						const self = this;
+						const postData = {};
+						postData.searchItem = {
+							thirdapp_id: 2
+						};
+						postData.getBefore = {
+							caseData: {
+								tableName: 'Label',
+								searchItem: {
+									title: ['=', ['首页轮播']],
+								},
+								middleKey: 'parentid',
+								key: 'id',
+								condition: 'in',
+							},
+						};
+						const callback = (res) => {
+							console.log(1000, res);
+							if (res.info.data.length > 0) {
+								self.sliderData.push.apply(self.sliderData, res.info.data)
+							}
+						};
+						window.base.labelGet(postData, callback);
+					},
+
+					intoPath(url,id) {
+						console.log(url);
+						var into_url = url;
+						window.location.href = into_url + '.html'+'?id='+id
+					},
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

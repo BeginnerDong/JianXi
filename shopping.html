@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>购物车</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-  #shopping{
+	<head id="header">
+		<title>购物车</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			#shopping{
   padding.:0rem 4%;
 }
 .select_status{width:8%;height:1.52rem;line-height:1.52rem;}
@@ -147,123 +147,258 @@
 }
 
 </style>
-</head>
-<body>
-<div id="app">
-  <div class="w750">
-     <div id="shopping">
-        <div class="shopping_item flex w710">
-            <div class="flexRowBetween product_cont" style="align-items:center;position: relative;">
-                <div class="select_status" @click="choose(0)">
-                    <img :src="currentId==0?'images/select_a.png':'images/select.png'">
-                </div>
-                <div class="shopping_img">
-                    <img src="images/img4@2x.png">
-                </div>
-                <div class="shopping_name">
-                    <p class="text1 avoidOverflow">商品名称商品名称商品名称</p>
-                    <p class="text2 flex">商品属性</p>
-                    <div class="flexRowBetween">
-                      <p class="price color_r">积分：56</p>
-                      <div class="edit_number flexRowBetween">
-                          <div class="minus" style="font-size:.50rem;line-height:.36rem;" >-</div>
-                          <input class="number"/>
-                          <div class="add">+</div>
-                      </div>
-                    </div>
-                </div>
-                
-                
-            </div>
-        </div>
-        <div class="shopping_item flex w710">
-            <div class="flexRowBetween product_cont" style="align-items:center;position: relative;">
-                <div class="select_status"  @click="choose(1)">
-                    <img :src="currentId==1?'images/select_a.png':'images/select.png'">
-                </div>
-                <div class="shopping_img">
-                    <img src="images/img4@2x.png">
-                </div>
-                <div class="shopping_name">
-                    <p class="text1 avoidOverflow">商品名称商品名称商品名称</p>
-                    <p class="text2 flex">商品属性</p>
-                    <div class="flexRowBetween">
-                      <p class="price color_r">积分：56</p>
-                      <div class="edit_number flexRowBetween">
-                          <div class="minus" style="font-size:.50rem;line-height:.36rem;" >-</div>
-                          <input class="number"/>
-                          <div class="add">+</div>
-                      </div>
-                    </div>
-                </div>
-                
-                
-            </div>
-        </div>
-        <div class="total" style="display:flex;">
-            <div class="all_select" style="width:10%;text-align:center;;overflow:hidden;" @click="chooseAll">
-                <img :src="chooseAll?'images/select_a.png':'images/select.png'">
-            </div>
-            <div class="select_c"  style="width:10%;text-align:left;overflow:hidden;" >全选</div>
-            <div class="del_shopping color_r" style="width:10%;text-align:left;overflow:hidden;" bindtap="delete">
-                删除
-            </div>
-            <div class="toalt1"  style="width:20%;text-align:right;overflow:hidden;">
-                合计:
-            </div>
-            <div class="priceNumber color_r" style="width:20%;text-align:center;overflow:hidden;">
-            积分:56
-            </div>
-            <div class="" style="align-items:center;width:35%;text-align:center;overflow:hidden;">
-                <div class="submit_shopping"  style="margin:0rem auto;">
-                    <div class="submit_shopping" @click="intoPath('confirmOrder')">
-                        <button>结算(1)</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-          currentId:0,
-          selectAll:false,
-        }   
+	</head>
+	<body>
+		<div id="app">
+			<div class="w750">
+				<div id="shopping">
+					<div class="shopping_item flex w710" v-for="(item,index) in mainData">
+						<div class="flexRowBetween product_cont" style="align-items:center;position: relative;">
+							<div class="select_status">
+								<img :src="item.isSelect?'images/select_a.png':'images/select.png'" @click="choose" :data-index='index'>
+							</div>
+							<div class="shopping_img">
+								<img :src="item.mainImg&&item.mainImg[0].url?item.mainImg[0].url:''">
+							</div>
+							<div class="shopping_name">
+								<p class="text1 avoidOverflow">{{item.title}}</p>
+								<p class="text2 flex">{{item.description}}</p>
+								<div class="flexRowBetween">
+									<p class="price color_r">积分：{{item.price}}</p>
+									<div class="edit_number flexRowBetween">
+										<div class="minus" style="font-size:.50rem;line-height:.36rem;" @click="counter" :data-index='index'
+										 data-type='-'>-</div>
+										<input class="number" :value="item.count" />
+										<div class="add" @click="counter" :data-index='index' data-type='+'>+</div>
+									</div>
+								</div>
+							</div>
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
 
-    methods:{
-      choose(url){
-        const self = this;
-        self.currentId = url;
-      },
-      chooseAll(){
-        const self = this;
-        self.chooseAll = !self.chooseAll;
-      },
-      intoPath(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url+'.html'
-      },
-    } 
+						</div>
+					</div>
 
-});           
-</script>
-</body>
+					<div class="total" style="display:flex;">
+						<div class="all_select" style="width:10%;text-align:center;;overflow:hidden;">
+							<img :src="isChooseAll?'images/select_a.png':'images/select.png'">
+						</div>
+						<div class="select_c" style="width:10%;text-align:left;overflow:hidden;" @click="chooseAll">全选</div>
+						<div class="del_shopping color_r" style="width:10%;text-align:left;overflow:hidden;" @click="deleteIndex">
+							删除
+						</div>
+						<div class="toalt1" style="width:20%;text-align:right;overflow:hidden;">
+							合计:
+						</div>
+						<div class="priceNumber color_r" style="width:20%;text-align:center;overflow:hidden;">
+							积分:{{totalPrice}}
+						</div>
+						<div class="" style="align-items:center;width:35%;text-align:center;overflow:hidden;">
+							<div class="submit_shopping" style="margin:0rem auto;">
+								<div class="submit_shopping" @click="addOrder">
+									<button>结算</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						currentId: 0,
+						selectAll: false,
+						mainData: [],
+						products: [],
+						totalPrice: 0,
+						buttonClick:false
+					}
+
+				},
+				mounted() {
+					window.addEventListener('scroll', this.handleScroll)
+				},
+
+				computed: {
+					// 计算属性的 getter
+					stringifyOrder: function() {
+						return JSON.stringify(this.order).replace(/\"/g, "");
+					}
+				},
+
+				created: function() {
+					const self = this;
+
+					self.getMainData()
+
+				},
+
+				methods: {
+					handleScroll() {
+						var wScrollY = window.scrollY; // 当前滚动条位置  
+						var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）  
+						var bScrollH = document.body.scrollHeight; // 滚动条总高度      
+						if ((wScrollY + wInnerH >= bScrollH) && !this.isLoadAll && !this.buttonClick) {
+							this.buttonClick = true;
+							this.paginate.currentPage++;
+							this.getMainData();
+						};
+					},
+
+					getMainData() {
+						const self = this;
+						self.mainData = window.base.getStorageArray('cartData');
+						console.log('onShow', self.mainData);
+						self.checkChooseAll();
+						self.countTotalPrice();
+					},
+
+					checkChooseAll() {
+						const self = this;
+						var isChooseAll = true;
+						for (var i = 0; i < self.mainData.length; i++) {
+							if (!self.mainData[i].isSelect) {
+								isChooseAll = false;
+							};
+						};
+						self.isChooseAll = isChooseAll;
+
+					},
+
+					chooseAll() {
+						const self = this;
+						self.isChooseAll = !self.isChooseAll;
+						for (var i = 0; i < self.mainData.length; i++) {
+							self.mainData[i].isSelect = self.isChooseAll;
+							
+						};
+						self.countTotalPrice();
+					},
+
+
+
+					choose(e) {
+						const self = this;
+						console.log(e)
+						const index = window.base.getDataSet(e, 'index').index;
+						if (self.mainData[index].isSelect) {
+							self.mainData[index].isSelect = false;
+						} else {
+							self.mainData[index].isSelect = true;
+						};
+						
+
+						self.checkChooseAll();
+						self.countTotalPrice();
+					},
+					
+					
+
+					deleteIndex() {
+						const self = this;
+						for (var i = 0; i < self.mainData.length; i++) {
+							if (self.mainData[i].isSelect) {
+								window.base.delStorageArray('cartData', self.mainData[i], 'id');
+							}
+						};
+						self.mainData = window.base.getStorageArray('cartData');
+						self.checkChooseAll();
+						self.countTotalPrice();
+					},
+
+					countTotalPrice() {
+						const self = this;
+						self.totalPrice = 0;
+						for (var i = 0; i < self.mainData.length; i++) {
+							if (self.mainData[i].isSelect) {
+								self.totalPrice += self.mainData[i].price * self.mainData[i].count;
+							};
+						};
+
+					},
+
+
+
+
+					counter(e) {
+						const self = this;
+						console.log(e);
+						const index = window.base.getDataSet(e, 'index').index;
+
+						if (window.base.getDataSet(e, 'type').type == '+') {
+							self.mainData[index].count++;
+						} else {
+							if (self.mainData[index].count > 1) {
+								self.mainData[index].count--;
+							}
+						};
+						window.base.setStorageArray('cartData', self.mainData[index], 'id', 999);
+
+						self.countTotalPrice();
+					},
+
+
+					pay(e) {
+						const self = this;
+						const productData = [
+
+						];
+						for (var i = 0; i < self.mainData.length; i++) {
+							if (self.mainData[i].isSelect) {
+								productData.push({
+									id: self.mainData[i].id,
+									count: self.mainData[i].count,
+								})
+
+							}
+						};
+						var orderList = [{
+							product: productData,
+
+						}];
+						const postData = {
+							token: localStorage.getItem('user_token'),
+							orderList: orderList,
+							type: 1
+						};
+
+						if (postData.orderList.length == 0) {
+							alert('未选择商品');
+							return;
+						};
+						const callback = (res) => {
+							if (res && res.solely_code == 100000) {
+								window.location.href = './confirmOrder.html?order_id=' + res.info.id + '&type=user'
+							} else {
+								alert(res.msg);
+							};
+						};
+						window.base.addOrder(postData, callback);
+					},
+
+					addOrder() {
+						const self = this;
+						var callback = (res) => {
+
+							this.pay()
+
+						};
+						window.base.getUserToken(callback);
+					},
+
+
+					intoPath(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html'
+					},
+				}
+
+			});
+		</script>
+	</body>
 </html>

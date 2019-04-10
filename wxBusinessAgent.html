@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>代理审核</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-.order_item{
+	<head id="header">
+		<title>代理审核</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.order_item{
   width:1.4rem;
   height:0.5rem;
   border:solid 1px #e0e0e0;
@@ -58,55 +58,106 @@
   margin-right:0.4rem;
 }
 </style>
-</head>
-<body style="background:#f2f2f2">
+	</head>
+	<body style="background:#f2f2f2">
 
-<div id="app">
-  <div class="w750">
+		<div id="app">
+			<div class="w750">
 
-    <div class="w690">
-      <div class="w690 perfomence bg1 flexRowBetween" @click="intoPath('wxBusinessAgentInfor')">
-        <div class="perfomence_left">
-          <p><span class="color6">姓名</span><span>肯德基</span></p>
-          <p><span class="color6">电话</span><span>15656556666</span></p>
-        </div>
-        <div class="perfomence_right">
-          <img src="images/next-page@2x.png">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        
-        }   
+				<div class="w690">
+					<div class="w690 perfomence bg1 flexRowBetween" v-for="item in mainData" @click="intoPath('wxBusinessAgentInfor',item.user_no)">
+						<div class="perfomence_left">
+							<p><span class="color6">姓名</span><span>{{item.name}}</span></p>
+							<p><span class="color6">电话</span><span>{{item.phone}}</span></p>
+						</div>
+						<div class="perfomence_right">
+							<img src="images/next-page@2x.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData: [],
+						paginate: {
+							count: 0,
+							currentPage: 1,
+							pagesize: 6,
+							is_page: true,
+						}
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-      const self= this;
-    },
+				},
+				mounted() {
+					window.addEventListener('scroll', this.handleScroll)
+				},
 
-    methods:{
-      intoPath(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url+'.html'
-      },
-    } 
+				computed: {
+					// 计算属性的 getter
+					stringifyOrder: function() {
+						return JSON.stringify(this.order).replace(/\"/g, "");
+					}
+				},
+				created: function() {
+					const self = this;
+					var callback = (res) => {
 
-});           
-</script>
-</body>
+						self.getMainData()
+
+					};
+					window.base.getMerchantToken(callback);
+				},
+
+				methods: {
+
+					handleScroll() {
+						var wScrollY = window.scrollY; // 当前滚动条位置  
+						var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）  
+						var bScrollH = document.body.scrollHeight; // 滚动条总高度      
+						if ((wScrollY + wInnerH >= bScrollH) && !this.isLoadAll && !this.buttonClick) {
+							this.buttonClick = true;
+							this.paginate.currentPage++;
+							this.getMainData();
+						};
+					},
+
+					getMainData() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('merchant_token'),
+							thirdapp_id: 2
+						};
+						postData.paginate = window.base.cloneForm(self.paginate);
+						postData.searchItem = {
+							agent_no: localStorage.getItem('merchant_no'),
+							user_type: 1,
+							behavior: 1
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData.push.apply(self.mainData, res.info.data)
+							} else {
+								alert('没有更多了')
+							}
+							console.log(self.mainData)
+						}
+						window.base.userInfoGet(postData, callback);
+					},
+
+					intoPath(url, id) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html' + '?user_no=' + id
+					},
+				}
+
+			});
+		</script>
+	</body>
 </html>

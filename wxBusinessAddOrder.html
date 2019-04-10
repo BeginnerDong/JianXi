@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head id="header">
-		<title>我的业绩</title>
+		<title>进货</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
 		<meta name="keywords" content="简希">
@@ -16,35 +16,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="js/base.js" type="application/javascript"></script>
 		<style>
-			.order_item{
-  width:1.4rem;
-  height:0.5rem;
-  border:solid 1px #e0e0e0;
-  border-radius:0.02rem;
-  float:right;
-  margin-top:0.3rem;
-  text-align: center;
-  line-height:0.5rem;
-}
-.tab_item{
-  width:50%;
-}
-.tab_this{
-  color:#212121;
-  border-bottom:solid 1px #212121;
-}
-.perfomence{
-  width:100%;
-  height:1rem;
-  border-radius:0.2rem;
-  margin-top:0.3rem;
-}
-.perfomence_item{
-  text-align: center;
-}
-.perfomence_item img{
-  width:0.14rem;
-  height:0.22rem;
+			#shopping{
+  padding.:0rem 4%;
 }
 .select_status{width:8%;height:1.52rem;line-height:1.52rem;}
 .select_status img{
@@ -119,10 +92,10 @@
   width:100%;
   height:1.10rem;
   position:fixed;
-  bottom:0;
-  left.:0rem;
+  bottom:0rem;
+  left:0rem;
   align-items:center;
-  background:#fff;
+  background:#f2f2f2;
   z-index:999;
 }
 .all_select img{
@@ -169,57 +142,53 @@
   margin-left:.10rem;
 
 }
+.confirm_btn{
+  height:1.00rem;
+  line-height: 1.00rem;
+  text-align: center;
+  width:100%;
+  position: fixed;
+  bottom: 0;
+  border-top:solid 1px #e0e0e0;
+}
+.confirm_left{
+  width:60%;
+  text-align: right;
+}
+.confirm_right{
+  width: 30%;
+  height:100%;
+  background: #ffbc2c;
+}
 .edit_number input{
   border:0;
 }
+
 </style>
 	</head>
-	<body style="background:#f2f2f2">
-
+	<body>
 		<div id="app">
 			<div class="w750">
-				<div class="tab font30 flexRowBetween color6 bg1">
-					<!-- <div class="tab_item" @click="tab(0)">
-            <span :class="currentId == 0?'tab_this':''">已下单</span>
-        </div> -->
-					<div class="tab_item" @click="tab(1)">
-						<span :class="currentId == 1?'tab_this':''">我的库存</span>
-					</div>
-					<div class="tab_item" @click="tab(2)">
-						<span :class="currentId == 2?'tab_this':''">业绩规则</span>
-					</div>
-				</div>
-				<!-- <div class="w690" :style="currentId==0?'display:block':'display:none'">
-					<div class="perfomence bg1 flexRowBetween" @click="intoPath('BusinessOrderDetail')">
-						<div class="perfomence_item font28 color2" style="width:18%">
-							张三
-						</div>
-						<div class="perfomence_item font28 color2" style="width:62%">
-							2018-9-9
-						</div>
-						<div class="perfomence_item font28 color2 flexRowBetween" style="width:20%;padding-right:3%;">
-							<p>2种</p>
-							<img src="images/next-page@2x.png" />
-						</div>
-					</div>
-				</div> -->
-				<div class="bg1" :style="currentId==1?'display:block':'display:none'">
-					<div class="shopping_item flex w710" v-for="(item,index) in mainData" v-if="item.orderItem.stock&&item.orderItem.stock>0">
+				<div id="shopping">
+					<div class="shopping_item flex w710" v-for="(item,index) in mainData">
 						<div class="flexRowBetween product_cont" style="align-items:center;position: relative;">
-							<div class="select_status">
+							<!-- <div class="select_status">
 								<img :src="item.isSelect?'images/select_a.png':'images/select.png'" @click="choose" :data-index='index'>
-							</div>
+							</div> -->
 							<div class="shopping_img">
 								<img :src="item.mainImg&&item.mainImg[0]&&item.mainImg[0].url?item.mainImg[0].url:''">
 							</div>
 							<div class="shopping_name">
-
 								<p class="text1 avoidOverflow">{{item.title}}</p>
 								<p class="text2 flex">{{item.description}}</p>
-								<div class=" flexRowBetween">
-									<p class="price color_r">
-										我的库存:{{item.orderItem&&item.orderItem.stock?item.orderItem.stock:''}}
+								<div class="flexRowBetween">
+									<p class="price color_r" v-if="userData.level==1">
+										¥{{item.price_one}}
 									</p>
+									<p class="price color_r" v-if="userData.level==2">¥{{item.price_two}}</p>
+									<p class="price color_r" v-if="userData.level==3">¥{{item.price_three}}</p>
+									<p class="price color_r" v-if="userData.level==4">¥{{item.price_four}}</p>
+									<p class="price color_r" v-if="userData.level==5">¥{{item.price_five}}</p>
 									<div class="edit_number flexRowBetween">
 										<div class="minus" style="font-size:.50rem;line-height:.36rem;" @click="counter" :data-index='index'
 										 data-type='-'>-</div>
@@ -227,39 +196,16 @@
 										<div class="add" @click="counter" :data-index='index' data-type='+'>+</div>
 									</div>
 								</div>
-
-
 							</div>
+
+
 						</div>
 					</div>
-					<div class="total" style="display:flex;">
-						<div class="all_select" style="width:10%;text-align:center;;overflow:hidden;">
-							<img :src="isChooseAll?'images/select_a.png':'images/select.png'">
-						</div>
-						<div class="select_c" style="width:10%;text-align:left;overflow:hidden;" @click="chooseAll">全选</div>
 
-						<div class="toalt1" style="width:30%;text-align:right;overflow:hidden;">
-							出库商品数量:
-						</div>
-						<div class="priceNumber color_r" style="width:15%;text-align:center;overflow:hidden;">
-							{{totalPrice}}
-						</div>
-						<div class="" style="align-items:center;width:35%;text-align:center;overflow:hidden;">
-							<div class="submit_shopping" style="margin:0rem auto;">
-								<div class="submit_shopping" @click="addOrder">
-									<button>出库</button>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="confirm_btn flexRowBetween font30">
+					<div class="confirm_left">合计:<span class="color_r"> ￥{{totalPrice}}</span></div>
+					<div class="confirm_right color1" @click="addOrder">结算</div>
 				</div>
-				<div class="w690" :style="currentId==2?'display:block':'display:none'">
-					<div class="bg1 shadow1" style="margin-top:0.4rem;">
-						<p class="auth_tlt font28 color2">{{artData.title}}</p>
-						<div class="auth_cont font28 color6 w710">
-							<div v-html="artData.content"></div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -269,24 +215,20 @@
 				el: '#app',
 				data: function() {
 					return {
-						currentId: 1,
+						currentId: 0,
+						selectAll: false,
 						mainData: [],
-						artData: [],
-						isChooseAll: false,
+						products: [],
 						totalPrice: 0,
-						paginate: {
-							count: 0,
-							currentPage: 1,
-							pagesize: 6,
-							is_page: true,
-						}
+						userData:[],
+						isChooseAll:false
 					}
 
 				},
 				mounted() {
 					window.addEventListener('scroll', this.handleScroll)
 				},
-
+				
 				computed: {
 					// 计算属性的 getter
 					stringifyOrder: function() {
@@ -295,15 +237,15 @@
 				},
 				created: function() {
 					var callback = (res) => {
-						this.getArtData();
+				
 						this.userGet();
 						this.getMainData()
 					};
 					window.base.getMerchantToken(callback);
 				},
-
+				
 				methods: {
-
+					
 					handleScroll() {
 						var wScrollY = window.scrollY; // 当前滚动条位置  
 						var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）  
@@ -314,15 +256,14 @@
 							this.getMainData();
 						};
 					},
-
-
+				
 					userGet() {
 						const self = this;
 						const postData = {
 							token: localStorage.getItem('merchant_token'),
 							thirdapp_id: 2,
-							searchItem: {
-								user_no: localStorage.getItem('merchant_no')
+							searchItem:{
+								user_no:localStorage.getItem('merchant_no')
 							}
 						};
 						const callback = (res) => {
@@ -362,91 +303,33 @@
 								condition: 'in',
 							},
 						};
-						postData.getAfter = {
-							orderItem: {
-								tableName: 'OrderItem',
-								middleKey: 'id',
-								key: 'product_id',
-								searchItem: {
-									/* user_no: localStorage.getItem('merchant_no'),
-									status: 1,
-									pay_status:1,
-									transport_status:2 */
-								},
-								condition: '=',
-								compute: {
-									stock: [
-										'sum',
-										'count',
-										{
-											status: 1,
-											user_no: localStorage.getItem('merchant_no'),
-											pay_status: 1,
-											transport_status: 2,
-											agent_no: ['not in', [localStorage.getItem('merchant_no')]],
-										}
-									],
-									reduce: [
-										'sum',
-										'count',
-										{
-											status: 1,
-											agent_no: localStorage.getItem('merchant_no'),
-											pay_status: 1,
-											transport_status: ['in',[1,2]]
-										}
-									],
-								},
-							}
-						};
 						const callback = (res) => {
 							if (res.info.data.length > 0) {
 								self.mainData.push.apply(self.mainData, res.info.data)
 								for (var i = 0; i < self.mainData.length; i++) {
-									self.mainData[i].isSelect = false;
+									
 									self.mainData[i].count = 0;
-									self.mainData[i].orderItem.stock = self.mainData[i].orderItem.stock - self.mainData[i].orderItem.reduce
-								}
+								};
 							} else {
 								self.isLoadAll = true;
 								alert('没有更多了');
 							};
-							self.checkChooseAll();
+							/* self.checkChooseAll(); */
 							self.countTotalPrice();
 							console.log('self.mainData', self.mainData)
 						};
 						window.base.productGet(postData, callback);
 					},
 
-					getArtData() {
-						const self = this;
-						const postData = {};
-						postData.searchItem = {
-							thirdapp_id: 2
-						};
-						postData.getBefore = {
-							caseData: {
-								tableName: 'Label',
-								searchItem: {
-									title: ['=', ['业绩规则']],
-								},
-								middleKey: 'menu_id',
-								key: 'id',
-								condition: 'in',
-							},
-						};
-						const callback = (res) => {
-							if (res.info.data.length > 0) {
-								self.artData = res.info.data[0]
-							} else {
-								alert('数据错误')
-							};
-							console.log('self.artData', self.artData)
-						};
-						window.base.articleGet(postData, callback);
-					},
+					/* 	getMainData(){
+						  const self = this;
+						  self.mainData = window.base.getStorageArray('cartData');
+							console.log('onShow', self.mainData);
+							self.checkChooseAll();
+							self.countTotalPrice();
+						}, */
 
-					checkChooseAll() {
+					/* checkChooseAll() {
 						const self = this;
 						var isChooseAll = true;
 						for (var i = 0; i < self.mainData.length; i++) {
@@ -455,9 +338,10 @@
 							};
 						};
 						self.isChooseAll = isChooseAll;
-					},
 
-					chooseAll() {
+					}, */
+
+					/* chooseAll() {
 						const self = this;
 						self.isChooseAll = !self.isChooseAll;
 						for (var i = 0; i < self.mainData.length; i++) {
@@ -482,7 +366,7 @@
 
 						self.checkChooseAll();
 						self.countTotalPrice();
-					},
+					}, */
 
 
 
@@ -491,10 +375,7 @@
 						self.totalPrice = 0;
 						for (var i = 0; i < self.mainData.length; i++) {
 							if (self.mainData[i].isSelect) {
-
-								self.totalPrice += self.mainData[i].count
-
-								/* if(self.userData.level==1){
+								if(self.userData.level==1){
 									self.totalPrice += self.mainData[i].price_one * self.mainData[i].count
 								}else if(self.userData.level==2){
 									self.totalPrice += self.mainData[i].price_two * self.mainData[i].count
@@ -504,98 +385,101 @@
 									self.totalPrice += self.mainData[i].price_four * self.mainData[i].count
 								}else if(self.userData.level==5){
 									self.totalPrice += self.mainData[i].price_five * self.mainData[i].count
-								} */
-
+								}
+								
 							};
 						};
 
 					},
+
+
+
 
 					counter(e) {
 						const self = this;
 						console.log(e);
 						const index = window.base.getDataSet(e, 'index').index;
-						self.mainData[index].isSelect = true;
-						if (window.base.getDataSet(e, 'type').type == '+') {
-							if (self.mainData[index].count >= self.mainData[index].orderItem.stock) {
-								alert('库存不足')
-							} else {
 
-								self.mainData[index].count++;
-							}
+						if (window.base.getDataSet(e, 'type').type == '+') {
+							self.mainData[index].count++;
+							self.mainData[index].isSelect = true;
 						} else {
-							if (self.mainData[index].count > 1) {
+							if (self.mainData[index].count > 0) {
 								self.mainData[index].count--;
 							}
 						};
+						
 						console.log('self.mainData', self.mainData)
 
 						self.countTotalPrice();
 					},
+					
 
-
-					pay(e) {
+				/* 	pay(e) {
 						const self = this;
 						const productData = [
-
+							
 						];
 						for (var i = 0; i < self.mainData.length; i++) {
 							if (self.mainData[i].isSelect) {
 								productData.push({
-									id: self.mainData[i].id,
-									count: self.mainData[i].count,
+								  id:self.mainData[i].id,
+								  count:self.mainData[i].count,	 
 								})
-
+								
 							}
 						};
 						var orderList = [{
-							product: productData,
-
+							product:productData,
+							
 						}];
 						const postData = {
 							token: localStorage.getItem('merchant_token'),
-							orderList: orderList,
-							type: 1,
-							data: {
-								agent_no: localStorage.getItem('merchant_no'),
-								pay_status: 1,
-								transport_status: 2
+							orderList:orderList,
+							type:1,
+							data:{
+								agent_no:localStorage.getItem('merchant_agent_no'),
 							}
 						};
-
+						
 						if (postData.orderList.length == 0) {
 							alert('未选择商品');
 							return;
 						};
-						const callback = (res) => {
+						const callback = (res) => {							
 							if (res && res.solely_code == 100000) {
-								alert('出库成功');
-								self.getMainData(true)
+								window.location.href = './confirmOrder.html?order_id=' + res.info.id
 							} else {
 								alert(res.msg);
 							};
-						};
+						};				
 						window.base.addOrder(postData, callback);
-					},
-
-					addOrder() {
+					}, */
+					
+					pay(){
 						const self = this;
-						var callback = (res) => {
-
-							this.pay()
-
-						};
-						window.base.getMerchantToken(callback);
+						for (var i = 0; i < self.mainData.length; i++) {
+							if (self.mainData[i].count>0) {
+								var res = window.base.setStorageArray('payPro', self.mainData[i], 'id', 999);
+								if(res){
+									window.location.href = './confirmMerchantOrder.html'
+								}
+							}
+						}
 					},
 
-					tab(url) {
+					addOrder(){
 						const self = this;
-						self.currentId = url;
+						this.pay()
+						
 					},
+
 					intoPath(url) {
+						console.log(url);
 						var into_url = url;
+						console.log(into_url);
 						window.location.href = into_url + '.html'
-					}
+					},
 				}
 
 			});

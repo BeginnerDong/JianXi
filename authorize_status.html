@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>授权</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-</head>
-<body>
-<style>
-  .auth_tlt{
+	<head id="header">
+		<title>授权</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/weui.min.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+	</head>
+	<body>
+		<style>
+			.auth_tlt{
     width:100%;
     height:0.88rem;
     line-height:0.88rem;
@@ -46,7 +47,7 @@
         color:#212121;
     }
     .submit_info{
-        width:2.4rem;
+        width:3.4rem;
         height:0.6rem;
         line-height:0.6rem;
         text-align: center;
@@ -60,73 +61,123 @@
         background:#cbcbcb;
     }
 </style>
-<div id="app">
-    <div class="w750">
-        <div class="w690">
-            <div class="input_list1 font28 flex">
-                <div class="input_before">您的姓名:</div>
-                <div class="input">葳蕤</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">联系电话:</div>
-                <div class="input">1232323323</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">邮箱:</div>
-                <div class="input">13122121@163.com</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">省市:</div>
-                <div class="input">陕西省西安市</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">代理级别:</div>
-                <div class="input">大区</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">上级微信:</div>
-                <div class="input">3212121</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">身份证号:</div>
-                <div class="input">21212222222222</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">出生日期:</div>
-                <div class="input">2019-9-9</div>
-            </div>
-        </div>
-    </div>
-    <div class="flexCenter" style="margin-top:0.3rem;"> 
-        <a class="submit_info status">状态：已通过<a>
-        <a class="submit_info status_no">状态：已通过<a>  
-    </div> 
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="w690">
+					<div class="input_list1 font28 flex">
+						<div class="input_before">您的姓名:</div>
+						<div class="input">{{mainData.name}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">联系电话:</div>
+						<div class="input">{{mainData.phone}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">邮箱:</div>
+						<div class="input">{{mainData.email}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">省市:</div>
+						<div class="input">{{mainData.province}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">代理级别:</div>
+						<div class="input" v-if="mainData.level==1">联创</div>
+						<div class="input" v-if="mainData.level==2">品牌官方</div>
+						<div class="input" v-if="mainData.level==3">大区主管</div>
+						<div class="input" v-if="mainData.level==4">经销商</div>
+						<div class="input" v-if="mainData.level==5">VIP</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">上级微信:</div>
+						<div class="input">{{mainData.parent_wechat}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">我的微信号:</div>
+						<div class="input">{{mainData.wechat}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">身份证号:</div>
+						<div class="input">{{mainData.idCard}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">出生日期:</div>
+						<div class="input">{{mainData.birth}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="flexCenter" style="margin-top:0.3rem;">
+				<a class="submit_info status" v-if="mainData.behavior==2">状态：已通过审核<a>
+				<a class="submit_info status_no" v-if="mainData.behavior==1">状态：暂未通过审核<a>
+				<a class="submit_info status_no" v-if="mainData.behavior==3">状态：申请被拒绝<a>
+			</div>
+		
+		
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+			
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<!-- <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+		<script>
+		// 初始化
+		var vConsole = new VConsole();
+		</script> -->
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData:[],
+					
+					}
 
-    methods:{
+				},
+				mounted() {
+
+				},
+				computed: {
+
+				},
+				created: function() {
+					
+					this.isLoad = true;
+			
+					var callback = (res) => {
+						this.getMainData();
+						
+					};
+					window.base.getUserToken(callback);
+
+				},
+
+				methods: {
+
+					getMainData() {
+						const self = this;
+						const postData = {};
+						postData.token = localStorage.getItem('user_token');
+						postData.searchItem = {
+							passage1: localStorage.getItem('user_no'),
+							user_type: 1
+						}
+				
+						const callback = (res) => {
+							console.log('res',res)
+							if (res.info.data.length > 0) {
+								
+								self.mainData = res.info.data[0]
+								
+							};
+							
+						
+						};
+						window.base.userInfoGet(postData, callback);
+					},
 
 
-    } 
+				}
 
-});           
-</script>
-</body>
+			});
+		</script>
+	</body>
 </html>

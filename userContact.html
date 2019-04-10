@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>联系我们</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
-  .contact{
+	<head id="header">
+		<title>联系我们</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.contact{
     text-align: center;
     width:100%;
   }
@@ -33,42 +33,70 @@
     line-height:0.9rem;
   }
 </style>
-</head>
-<body>
+	</head>
+	<body>
 
-<div id="app">
-  <div class="w750 flex" style="height:100vh">
-     <div class="contact">   
-      <img src="images/user-icon5@2x.png"/>
-      <a class="color2 font36" href="tel:12132566215">12132566215</a>
-     </div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        }   
+		<div id="app">
+			<div class="w750 flex" style="height:100vh">
+				<div class="contact">
+					<img :src="mainData.mainImg&&mainData.mainImg[0]?mainData.mainImg[0].url:''" />
+					<a class="color2 font36" href="tel:15644984984">{{mainData.contactPhone}}</a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData:[]
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+				},
+				mounted() {
 
-    methods:{
+				},
+				computed: {
 
+				},
+				created: function() {
+					this.getMainData()
+				},
 
-    } 
+				methods: {
 
-});           
-</script>
-</body>
+					getMainData() {
+						const self = this;
+						const postData = {};
+						postData.searchItem = {
+							thirdapp_id: 2
+						};
+						postData.getBefore = {
+							caseData: {
+								tableName: 'Label',
+								searchItem: {
+									title: ['=', ['联系我们']],
+								},
+								middleKey: 'menu_id',
+								key: 'id',
+								condition: 'in',
+							},
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData = res.info.data[0]
+							} else {
+								alert('数据错误')
+							};
+							console.log('self.mainData', self.mainData)
+						};
+						window.base.articleGet(postData, callback);
+					},
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

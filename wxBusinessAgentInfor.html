@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>授权</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-</head>
-<body>
-<style>
-  .auth_tlt{
+	<head id="header">
+		<title>授权</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+	</head>
+	<body>
+		<style>
+			.auth_tlt{
     width:100%;
     height:0.88rem;
     line-height:0.88rem;
@@ -39,7 +39,7 @@
     .input_list1 .input{
         width:76%;
         padding-left:2%;
-        height:100%;
+        
         border-radius:.16rem;
         border:none;
         color:#212121;
@@ -66,81 +66,162 @@
         text-align: center;
     }
 </style>
-<div id="app">
-    <div class="w750">
-        <div class="w690">
-            <div class="input_list1 font28 flex">
-                <div class="input_before">您的姓名:</div>
-                <div class="input flex" >张三</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">联系电话:</div>
-                <div class="input flex">3123121</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">邮箱:</div>
-                 <div class="input flex">2131321</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">省市:</div>
-                 <div class="input flex">陕西省西安市雁塔区</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">代理级别:</div>
-                 <div class="input flex">大区</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">上级微信:</div>
-                 <div class="input flex">2131321</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">身份证号:</div>
-                 <div class="input flex">2131321</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">出生日期:</div>
-                 <div class="input flex">20198-9-9</div>
-            </div>
-            <div class="input_list1 font28 flex">
-                <div class="input_before">审核状态:</div>
-                 <div class="input flex">
-                    <div class="status_info color1" @click="status(0)" style="width:1rem;height:0.5rem;" :style="is_status==0?'background:#ffbc2c':''">通过</div>
-                    <div class="status_info color1" @click="status(1)" style="width:1.4rem;height:0.5rem;" :style="is_status==1?'background:#ffbc2c':''">不通过</div>
-                 </div>
-            </div>
-        </div>
-    </div>
-    <a class="submit_info">提交<a>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-            is_status:0,
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="w690">
+					<div class="input_list1 font28 flex">
+						<div class="input_before">您的姓名:</div>
+						<div class="input">{{mainData.name}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">联系电话:</div>
+						<div class="input">{{mainData.phone}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">邮箱:</div>
+						<div class="input">{{mainData.email}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">省市:</div>
+						<div class="input">{{mainData.province}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">代理级别:</div>
+						<div class="input" v-if="mainData.level==1">联创</div>
+						<div class="input" v-if="mainData.level==2">品牌官方</div>
+						<div class="input" v-if="mainData.level==3">大区主管</div>
+						<div class="input" v-if="mainData.level==4">经销商</div>
+						<div class="input" v-if="mainData.level==5">VIP</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">上级微信:</div>
+						<div class="input">{{mainData.parent_wechat}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">我的微信号:</div>
+						<div class="input">{{mainData.wechat}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">身份证号:</div>
+						<div class="input">{{mainData.idCard}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">出生日期:</div>
+						<div class="input">{{mainData.birth}}</div>
+					</div>
+					<div class="input_list1 font28 flex">
+						<div class="input_before">审核状态:</div>
+						<div class="input flex">
+							<div class="status_info color1" @click="status(2)" style="width:1rem;height:0.5rem;" :style="behavior==2?'background:#ffbc2c':''">通过</div>
+							<div class="status_info color1" @click="status(3)" style="width:1.4rem;height:0.5rem;" :style="behavior==3?'background:#ffbc2c':''">不通过</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a class="submit_info" @click="userInfoUpdate">提交<a>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData: [],
+						behavior: 2,
+						nowTime:''
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+				},
+				mounted() {
 
-    methods:{
-        status(id){
-            const self = this;
-            self.is_status = id;
-        },
+				},
+				computed: {
 
-    } 
+				},
+				created: function() {
+					const self = this;
+					self.nowTime = Date.parse(new Date())/1000;
+					console.log('nowTime')
+					var callback = (res) => {
 
-});           
-</script>
-</body>
+						self.getMainData()
+
+					};
+					window.base.getMerchantToken(callback);
+				},
+
+				methods: {
+
+					getMainData() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('merchant_token'),
+							thirdapp_id: 2
+						};
+						postData.searchItem = {
+							/* agent_no: localStorage.getItem('merchant_no'), */
+							user_type: 1,
+							behavior: 1,
+							user_no: window.base.GetRequest().user_no
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData = res.info.data[0]
+							} else {
+								alert('数据错误')
+							}
+							console.log(self.mainData)
+						}
+						window.base.userInfoGet(postData, callback);
+					},
+
+					status(id) {
+						const self = this;
+						self.behavior = id;
+					},
+
+					userInfoUpdate() {
+						const self = this;
+						
+						const postData = {};
+						postData.token = localStorage.getItem('merchant_token');
+						postData.searchItem = {
+							user_no: window.base.GetRequest().user_no
+						};
+						postData.data = {
+							behavior: self.behavior,
+							start_time:self.nowTime,
+							end_time:self.nowTime+31536000
+						};
+						postData.saveAfter = [
+							{
+								tableName: 'User',
+								FuncName: 'update',
+								data: {
+									status: 1
+								},
+								searchItem: {
+									user_no: window.base.GetRequest().user_no
+								}
+							},
+						 ]
+						const callback = (data) => {
+							if (data.solely_code == 100000) {
+								alert('操作成功')
+
+								window.location.href = "./wxBusinessAgent.html";
+
+							} else {
+								alert('网络故障')
+							};
+						};
+						window.base.userInfoUpdate(postData, callback);
+					},
+
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

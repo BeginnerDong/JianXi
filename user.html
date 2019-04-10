@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>个人中心</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-</head>
-<body style="background:#f8f8f8;">
-<style>
- .user_banner{
+	<head id="header">
+		<title>个人中心</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+	</head>
+	<body style="background:#f8f8f8;">
+		<style>
+			.user_banner{
   width:100%;
   height:2.20rem;
 }
@@ -158,138 +158,169 @@
   display:block;
 }
 </style>
-<div id="app">
-    <div class="w750">
-        <div class="user_banner bg1 flex">
-          <div class="banner_left flex">
-              <div class="user_img">
-                  <img src="images/my-img@2x.png"/>
-              </div>
-          </div>
-          <div class="banner_right">
-            <p class="font28 color2">名称名称名称名称</p>
-            <span class="bank font22">皇冠会员</span>
-          </div>
-          <div class="credit flexRowBetween">
-            <p class="font26 color2">剩余积分</p>
-            <p class="font26 color_y">566</p>
-          </div>
-      </div>
-      <div class="order w710 font30 color3">
-          <div class="user_order flexRowBetween" @click="intoPath('userOrder')">
-              <div class="order_left flex">
-                  <img src="images/user_icon1.jpg"/>
-                  <div class="my_order color2 font30">我的订单</div>
-              </div>
-              
-              <div class="check_order flexRowBetween">
-                  <div class="font26 color6">
-                      查看订单
-                  </div>
-                  <img src="images/next-page@2x.png"/>
-              </div>
-          </div>
-      </div>
-      <div class="w710 font30 color3 bg1" >
-          <div class="process flexRowBetween">
-              <div class="peocess_item item_other" @click="intoPath_a('userOrder.html?id=0')">
-                  <img src="images/user-icon1@2x.png"/>
-                  <span class="font22 color6">待付款</span>
-              </div>
-              <div class="peocess_item" @click="intoPath_a('userOrder.html?id=1')">
-                  <img src="images/user-icon2@2x.png"/>
-                  <span class="font22 color6">待发货</span>
-              </div>
-              <div class="peocess_item" @click="intoPath_a('userOrder.html?id=2')">
-                  <img src="images/user-icon3@2x.png"/>
-                  <span class="font22 color6">待收货</span>
-              </div>
-              <div class="peocess_item"@click="intoPath_a('userOrder.html?id=3')">
-                  <img src="images/user-icon4@2x.png"/>
-                  <span class="font22 color6">已完成</span>
-              </div>
-              <div class="peocess_item" @click="intoPath_a('userOrder.html?id=4')">
-                  <img src="images/user-icon5@2x.png"/>
-                  <span class="font22 color6">已撤销</span>
-              </div>
-          </div>
-      </div>
-      <div class="user_all font30 color3">
-          <div class="user_infor flexRowBetween w710"  @click="intoPath('userAddress')">
-              <div class="user_left flexRowBetween">
-                  <img src="images/user-icon6@2x.png"/>
-                  <span>收货地址</span>
-              </div>
-              <div class="next_page">
-                  <img src="images/next-page@2x.png"/>
-              </div>
-          </div>
-          <div class="user_infor flexRowBetween w710" @click="intoPath('userCollect')">
-              <div class="user_left flexRowBetween">
-                  <img src="images/user-icon7@2x.png"/>
-                  <span>我的收藏</span>
-              </div>
-              <div class="next_page">
-                  <img src="images/next-page@2x.png"/>
-              </div>
-          </div>
-          <div class="user_infor flexRowBetween w710" style="margin-top:0.2rem;" @click="intoPath('userContact')">
-              <div class="user_left flexRowBetween">
-                  <img src="images/user-icon8@2x.png"/>
-                  <span>联系我们</span>
-              </div>
-              <div class="next_page">
-                  <img src="images/next-page@2x.png"/>
-              </div>
-          </div>
-          <div class="user_infor flexRowBetween w710" @click="intoPath('userAbout')">
-              <div class="user_left flexRowBetween">
-                  <img src="images/user-icon9@2x.png"/>
-                  <span>关于我们 </span>
-              </div>
-              <div class="next_page">
-                  <img src="images/next-page@2x.png"/>
-              </div>
-          </div>
-      </div>
-    </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="user_banner bg1 flex">
+					<div class="banner_left flex">
+						<div class="user_img">
+							<img :src="mainData.headImgUrl" />
+						</div>
+					</div>
+					<div class="banner_right">
+						<p class="font28 color2">{{mainData.nickname}}</p>
+						<!-- <span class="bank font22">皇冠会员</span> -->
+					</div>
+					<div class="credit flexRowBetween">
+						<p class="font26 color2">剩余积分</p>
+						<p class="font26 color_y">{{mainData.info&&mainData.info.score?mainData.info.score:''}}</p>
+					</div>
+				</div>
+				<div class="order w710 font30 color3">
+					<div class="user_order flexRowBetween" @click="intoPath('userOrder')">
+						<div class="order_left flex">
+							<img src="images/user_icon1.jpg" />
+							<div class="my_order color2 font30">我的订单</div>
+						</div>
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+						<div class="check_order flexRowBetween">
+							<div class="font26 color6">
+								查看订单
+							</div>
+							<img src="images/next-page@2x.png" />
+						</div>
+					</div>
+				</div>
+				<div class="w710 font30 color3 bg1">
+					<div class="process flexRowBetween">
+						<div class="peocess_item item_other" @click="intoPath_a('userOrder.html?id=0')">
+							<img src="images/user-icon1@2x.png" />
+							<span class="font22 color6">待付款</span>
+						</div>
+						<div class="peocess_item" @click="intoPath_a('userOrder.html?id=1')">
+							<img src="images/user-icon2@2x.png" />
+							<span class="font22 color6">待发货</span>
+						</div>
+						<div class="peocess_item" @click="intoPath_a('userOrder.html?id=2')">
+							<img src="images/user-icon3@2x.png" />
+							<span class="font22 color6">待收货</span>
+						</div>
+						<div class="peocess_item" @click="intoPath_a('userOrder.html?id=3')">
+							<img src="images/user-icon4@2x.png" />
+							<span class="font22 color6">已完成</span>
+						</div>
+						<div class="peocess_item" @click="intoPath_a('userOrder.html?id=4')">
+							<img src="images/user-icon5@2x.png" />
+							<span class="font22 color6">已撤销</span>
+						</div>
+					</div>
+				</div>
+				<div class="user_all font30 color3">
+					<div class="user_infor flexRowBetween w710" @click="intoAaddress('userAddress')">
+						<div class="user_left flexRowBetween">
+							<img src="images/user-icon6@2x.png" />
+							<span>收货地址</span>
+						</div>
+						<div class="next_page">
+							<img src="images/next-page@2x.png" />
+						</div>
+					</div>
+					<div class="user_infor flexRowBetween w710" @click="intoPath('userCollect')">
+						<div class="user_left flexRowBetween">
+							<img src="images/user-icon7@2x.png" />
+							<span>我的收藏</span>
+						</div>
+						<div class="next_page">
+							<img src="images/next-page@2x.png" />
+						</div>
+					</div>
+					<div class="user_infor flexRowBetween w710" style="margin-top:0.2rem;" @click="intoPath('userContact')">
+						<div class="user_left flexRowBetween">
+							<img src="images/user-icon8@2x.png" />
+							<span>联系我们</span>
+						</div>
+						<div class="next_page">
+							<img src="images/next-page@2x.png" />
+						</div>
+					</div>
+					<div class="user_infor flexRowBetween w710" @click="intoPath('userAbout')">
+						<div class="user_left flexRowBetween">
+							<img src="images/user-icon9@2x.png" />
+							<span>关于我们 </span>
+						</div>
+						<div class="next_page">
+							<img src="images/next-page@2x.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						mainData:[],
+					}
 
-    methods:{
-      intoPath(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url+'.html'
-      },
-      intoPath_a(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url
-      }
+				},
+				mounted() {
 
-    } 
+				},
+				computed: {
 
-});           
-</script>
-</body>
+				},
+				created: function() {
+						var callback = (res)=>{
+						  
+						  this.userGet()
+						  
+						};
+						window.base.getUserToken(callback);
+				},
+
+				methods: {
+
+					userGet() {
+						const self = this;
+						const postData = {
+							token: localStorage.getItem('user_token'),
+							thirdapp_id: 2
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData = res.info.data[0]
+							} else {
+								alert('数据错误')
+							}
+							console.log(self.mainData)
+						}
+						window.base.userGet(postData, callback);
+					},
+		
+					intoAaddress(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html'+'?type=user'
+					},
+
+					intoPath(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html'
+					},
+					intoPath_a(url) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url
+					}
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

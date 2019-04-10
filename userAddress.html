@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>收货地址</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-<style>
- .address_list{
+	<head id="header">
+		<title>收货地址</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+		<style>
+			.address_list{
   width:100%;
   height:0.76rem;
   line-height:0.9rem;
@@ -58,82 +58,191 @@
   line-height:0.8rem;
  }
 </style>
-</head>
-<body style="background:#f8f8f8;">
+	</head>
+	<body style="background:#f8f8f8;">
 
-<div id="app">
-  <div class="w750">
-    <div class="userAddress bg1">
-      <div class="address_list flexRowBetween w690">
-        <p class="color2 font28">张三</p>
-        <p class="color9 font26">1545646465</p>
-      </div>
-      <div class=" w690 font28 color2 avoidOverflow">陕西省西安市高新区大都会</div>
-      <div class="w690 address_handle flex">
-        <div class="address_left flex" @click="choose(0)">
-          <img :src="is_choose==0?'images/select_a.png':'images/select.png'"/>
-          <span>默认地址</span>
-        </div>
-        <div class="address_right flexRowBetween">
-          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>编辑</span></div>
-          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>删除</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="userAddress bg1">
-      <div class="address_list flexRowBetween w690">
-        <p class="color2 font28">张三</p>
-        <p class="color9 font26">1545646465</p>
-      </div>
-      <div class=" w690 font28 color2 avoidOverflow">陕西省西安市高新区大都会</div>
-      <div class="w690 address_handle flex">
-        <div class="address_left flex" @click="choose(1)">
-          <img :src="is_choose==1?'images/select_a.png':'images/select.png'"/>
-          <span>默认地址</span>
-        </div>
-        <div class="address_right flexRowBetween">
-          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>编辑</span></div>
-          <div class="flex" style="width:50%;"><img src="images/edit.png"/><span>删除</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="submit_info" @click="intoPath('userAddressNew')">添加</div>
-  </div>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-          is_choose:0,
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="userAddress bg1" v-for="item in mainData">
+					<div class="address_list flexRowBetween w690">
+						<p class="color2 font28">{{item.name}}</p>
+						<p class="color9 font26">{{item.phone}}</p>
+					</div>
+					<div class=" w690 font28 color2 avoidOverflow">{{item.city+item.detail}}</div>
+					<div class="w690 address_handle flex">
+						<div class="address_left flex" @click="updateAddress(item.id)">
+							<img :src="item.isdefault==1?'images/select_a.png':'images/select.png'" />
+							<span>{{item.isdefault==1?'默认地址':'选为默认地址'}}</span>
+						</div>
+						<div class="address_right flexRowBetween">
+							<div class="flex" style="width:50%;" @click="intoEdit('userAddressNew',type,item.id)"><img src="images/edit.png" /><span>编辑</span></div>
+							<div class="flex" style="width:50%;" @click="deleteAddress(item.id)"><img src="images/edit.png" /><span>删除</span></div>
+						</div>
+					</div>
+				</div>
+				<div style="width:100%;height:0.8rem">
+					
+				</div>
+				<div class="submit_info" @click="intoPath('userAddressNew',type)">添加</div>
+			</div>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						is_choose: 0,
+						mainData: [],
+						paginate: {
+							count: 0,
+							currentPage: 1,
+							pagesize: 10,
+							is_page: true,
+						},
+						buttonClick:false
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
-            
-    },
+				},
+				mounted() {
+					window.addEventListener('scroll', this.handleScroll)
+				},
+				
+				computed: {
+					// 计算属性的 getter
+					stringifyOrder: function() {
+						return JSON.stringify(this.order).replace(/\"/g, "");
+					}
+				},
+				
+				created: function() {
+					this.type = window.base.GetRequest().type;
+					var callback = (res) => {
+						
+						this.getMainData()
+					};
+					window.base.getUserToken(callback);
+				},
 
-    methods:{
-      choose(id){
-        const self = this;
-        self.is_choose = id;
-      },
-      intoPath(url){
-          console.log(url);
-          var into_url = url;
-          console.log(into_url);
-          window.location.href=into_url+'.html'
-      }
-    } 
+				methods: {
+					
+					handleScroll() {
+						var wScrollY = window.scrollY; // 当前滚动条位置  
+						var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）  
+						var bScrollH = document.body.scrollHeight; // 滚动条总高度      
+						if ((wScrollY + wInnerH >= bScrollH) && !this.isLoadAll && !this.buttonClick) {
+							this.buttonClick = true;
+							this.paginate.currentPage++;
+							this.getMainData();
+						};
+					},
 
-});           
-</script>
-</body>
+					getMainData(isNew) {
+						const self = this;
+						if (isNew) {
+							self.paginate = {
+								count: 0,
+								currentPage: 1,
+								pagesize: 10,
+								is_page: true,
+							}
+						};
+						const postData = {};
+						postData.paginate = window.base.cloneForm(self.paginate);
+						if(self.type=='user'){
+							postData.token = localStorage.getItem('user_token');
+						}else{
+							postData.token = localStorage.getItem('merchant_token');
+						};
+						const callback = (res) => {
+							if (res.info.data.length > 0) {
+								self.mainData.push.apply(self.mainData, res.info.data);
+							} else {
+								self.isLoadAll = true;
+								alert('没有更多了');
+							};
+						};
+						window.base.addressGet(postData, callback);
+					},
+
+
+					chooseToBuy(e) {
+						const self = this;
+						const id = window.base.getDataSet(e, 'id');
+
+
+					},
+
+
+
+					deleteAddress(id) {
+						const self = this;
+						const postData = {};
+						postData.searchItem = {};
+						postData.searchItem.id = id;
+						if(self.type=='user'){
+							postData.token = localStorage.getItem('user_token');
+						}else{
+							postData.token = localStorage.getItem('merchant_token');
+						};
+						const callback = (res) => {
+
+							if (res) {
+								self.mainData = [];
+								self.getMainData(true);
+							}
+						};
+						window.base.addressDelete(postData, callback)
+					},
+
+
+					updateAddress(id) {
+						const self = this;
+						const postData = {};
+						if(self.type=='user'){
+							postData.token = localStorage.getItem('user_token');
+						}else{
+							postData.token = localStorage.getItem('merchant_token');
+						};
+						postData.searchItem = {};
+						postData.searchItem.id = id;
+						postData.data = {
+							isdefault: 1
+						}
+						const callback = (res) => {
+
+							if (res) {
+								self.mainData = [];
+								self.getMainData(true);
+							}
+						};
+						window.base.addressUpdate(postData, callback);
+					},
+
+
+					/* 	chooseDefalut(id) {
+							const self = this;
+							self.chooseDefalutId = id;
+							self.updateAddress
+						}, */
+
+					intoPath(url,type) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html'+'?type='+type
+					},
+					
+					intoEdit(url,type,id) {
+						console.log(url);
+						var into_url = url;
+						console.log(into_url);
+						window.location.href = into_url + '.html'+'?type='+type+'&id='+id
+					}
+
+				}
+
+			});
+		</script>
+	</body>
 </html>

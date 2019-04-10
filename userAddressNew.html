@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head id="header">
-<title>添加地址</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="baidu-site-verification" content="z8EeuYl0nS" />
-<meta name="keywords" content="简希">
-<meta name="description" content="简希">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/basic.css" rel="stylesheet"/>
-<link href="css/style.css" rel="stylesheet"/>
-<script src="js/rem.js"></script>
-<script type="text/javascript"  src="js/jquery-2.1.4.min.js"></script>
-<script src="js/browser.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="js/base.js" type="application/javascript"></script>
-</head>
-<body>
-<style>
-  .auth_tlt{
+	<head id="header">
+		<title>添加地址</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="baidu-site-verification" content="z8EeuYl0nS" />
+		<meta name="keywords" content="简希">
+		<meta name="description" content="简希">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/basic.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<script src="js/rem.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script src="js/base.js" type="application/javascript"></script>
+	</head>
+	<body>
+		<style>
+			.auth_tlt{
     width:100%;
     height:0.88rem;
     line-height:0.88rem;
@@ -61,64 +61,200 @@
         height:0.5rem;
     }
 </style>
-<div id="app">
-    <div class="w750">
-        <div class="input_list1 w690 font28 flex">
-            <div class="input_before">收货人:</div>
-            <input placeholder="请输入收货人姓名"></input>
-        </div>
-        <div class="input_list1  w690 font28 flex">
-            <div class="input_before">联系电话:</div>
-            <input placeholder="请输入联系电话"></input>
-        </div>
-        <div class="input_list1  w690 font28 flex">
-            <div class="input_before">所在地区:</div>
-            <input placeholder="请输入所在地区"></input>
-        </div>
-        <div class="input_list1  w690 font28 flex">
-            <div class="input_before">详细地址:</div>
-            <input placeholder="如街道、门牌号"></input>
-        </div>
-        <div class="input_list1  w690 flexRowBetween">
-            <div class="input_left font28 color2">
-                设为默认地址
-            </div>
-            <div class="input_right" @click="choose">
-                <img :src="is_choose?'images/choose.png':'images/choose_a.png'">
-            </div>
-        </div>
-    </div>
-    <a class="submit_info" href="userAddress.html">提交<a>
-</div>
-<script type="text/javascript " src="js/bootstrap.js"></script>
-<script type="text/javascript">          
-var app = new Vue({
-    el: '#app',
-    data: function() {
-        return {
-            is_choose:false,
-        }   
+		<div id="app">
+			<div class="w750">
+				<div class="input_list1 w690 font28 flex">
+					<div class="input_before">收货人:</div>
+					<input placeholder="请输入收货人姓名" v-model="submitData.name"></input>
+				</div>
+				<div class="input_list1  w690 font28 flex">
+					<div class="input_before">联系电话:</div>
+					<input placeholder="请输入联系电话" v-model="submitData.phone"></input>
+				</div>
+				<div class="input_list1  w690 font28 flex">
+					<div class="input_before">所在地区:</div>
+					<input placeholder="请输入所在地区" v-model="submitData.city"></input>
+				</div>
+				<div class="input_list1  w690 font28 flex">
+					<div class="input_before">详细地址:</div>
+					<input placeholder="如街道、门牌号" v-model="submitData.detail"></input>
+				</div>
+				<div class="input_list1  w690 flexRowBetween">
+					<div class="input_left font28 color2">
+						设为默认地址
+					</div>
+					<div class="input_right" @click="choose">
+						<img :src="isDefalut?'images/choose_a.png':'images/choose.png'">
+					</div>
+				</div>
+			</div>
+			<a class="submit_info" @click="buttonCanClick?submit():''">提交</a>
+		</div>
+		<script type="text/javascript " src="js/bootstrap.js"></script>
+		<script type="text/babel">
+			var app = new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						isDefalut: true,
+						submitData: {
+							name: '',
+							phone: '',
+							city: '',
+							detail: '',
+							isdefault: 1
+						},
+						buttonCanClick: true
+					}
 
-    },
-    mounted () {
-		 
-	},
-    computed: {
-          
-    },
-    created: function () {
+				},
+				mounted() {
 
-    },
+				},
+				computed: {
 
-    methods:{
-        choose(){
-            const self = this;
-            self.is_choose = !self.is_choose;
-        },
+				},
+				created: function() {
+					this.type = window.base.GetRequest().type;
+					console.log('this.type',this.type)
+					if(this.type=='user'){
+						var callback = (res) => {
+							if (window.base.GetRequest().id) {
+								this.getMainData(window.base.GetRequest().id)
+							}
+						};
+						window.base.getUserToken(callback);
+					}else{
+						var callback = (res) => {
+							if (window.base.GetRequest().id) {
+								this.getMainData(window.base.GetRequest().id)
+							}
+						};
+						window.base.getMerchantToken(callback);
+					}
+					
+				},
 
-    } 
+				methods: {
 
-});           
-</script>
-</body>
+					getMainData(id) {
+						const self = this;
+						const postData = {};
+						postData.searchItem = {};
+						postData.searchItem.id = id;
+						if(self.type=='user'){
+							postData.token = localStorage.getItem('user_token');
+						}else{
+							postData.token = localStorage.getItem('merchant_token');
+						};
+						const callback = (res) => {
+							console.log(res);
+							self.submitData.phone = res.info.data[0].phone;
+							self.submitData.name = res.info.data[0].name;
+							self.submitData.detail = res.info.data[0].detail;
+							self.submitData.city = res.info.data[0].city;
+							self.submitData.isdefault = res.info.data[0].isdefault;
+						};
+						window.base.addressGet(postData, callback);
+					},
+
+
+
+					addressUpdate() {
+						const self = this;
+						const postData = {};
+						if(self.type=='user'){
+							postData.token = localStorage.getItem('user_token');
+						}else{
+							postData.token = localStorage.getItem('merchant_token');
+						};
+						postData.searchItem = {};
+						postData.searchItem.id = window.base.GetRequest().id;
+						postData.data = {};
+						postData.data = window.base.cloneForm(self.submitData);
+
+						const callback = (data) => {
+							
+							if (data && data.solely_code == 100000) {
+								alert('修改成功');
+								window.location.href = 'userAddress.html?type='+self.type
+							} else {
+								alert(data.msg)
+							};
+							self.buttonCanClick = true;
+						};
+						window.base.addressUpdate(postData, callback);
+					},
+
+
+					addressAdd() {
+						const self = this;
+						const postData = {};
+						if(self.type=='user'){
+							postData.token = localStorage.getItem('user_token');
+						}else{
+							postData.token = localStorage.getItem('merchant_token');
+						};
+						postData.data = {};
+						postData.data = window.base.cloneForm(self.submitData);
+
+						const callback = (data) => {
+							
+							if (data && data.solely_code == 100000) {
+								alert('添加成功');
+								window.location.href = 'userAddress.html?type='+self.type
+							} else {
+								alert(data.msg)
+							}	
+							self.buttonCanClick = true;
+						};
+						window.base.addressAdd(postData, callback);
+					},
+
+
+					submit() {
+						const self = this;
+						self.buttonCanClick = false;
+						var phone = self.submitData.phone;
+						const pass = window.base.checkComplete(self.submitData);
+
+						console.log('self.data.sForm', self.submitData)
+						console.log('pass', pass)
+						if (pass) {
+							if (phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
+								alert('手机格式不正确')
+							} else {
+								if (window.base.GetRequest().id) {
+
+									self.addressUpdate();
+								} else {
+
+									self.addressAdd();
+								}
+
+							}
+						} else {
+							self.buttonCanClick = true;
+							alert('请补全信息');
+						};
+					},
+
+
+					choose() {
+						const self = this;
+						self.isDefalut = !self.isDefalut;
+						console.log('self.isDefalut', self.isDefalut)
+						if (!self.isDefalut) {
+							self.submitData.isdefault = 2
+						} else {
+							self.submitData.isdefault = 1
+						}
+						console.log('self.submitData.isdefault', self.submitData.isdefault)
+					},
+
+				}
+
+			});
+		</script>
+	</body>
 </html>
